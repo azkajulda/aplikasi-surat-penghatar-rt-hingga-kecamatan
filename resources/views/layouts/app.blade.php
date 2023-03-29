@@ -9,7 +9,7 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="{{asset('./login-asset/images/icons/favicon.ico"')}}/>
+	<link rel="icon" type="image/png" href="{{asset('./login-asset/images/icons/favicon.ico')}}"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{asset('./login-asset/vendor/bootstrap/css/bootstrap.min.css')}}">
 <!--===============================================================================================-->
