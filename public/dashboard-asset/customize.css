@@ -1,0 +1,51 @@
+/* Utility */
+.my-20 {
+    margin: 20px 0px;
+}
+
+.mr-33 {
+    margin-right: 33px;
+}
+
+
+/* Comonent */
+.txt-white {
+    color: #fff;
+}
+
+.image-beranda {
+    object-fit: cover;
+    width: 100%;
+    margin-top: 75px;
+}
+
+.img-logo-beranda {
+    margin: 26px 0px;
+    width: 25%;
+}
+
+.btn-beranda {
+    width: 40%;
+    margin: 34px auto;
+}
+
+.footer-customize {
+    background: #222d32;
+    padding: 25px;
+    color: #444;
+    border-top: 1px solid #d2d6de;
+}
+
+@media (max-width: 992px) {
+    .image-beranda {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+   
+}
+
+@media (max-width: 576px) {
+    
+}

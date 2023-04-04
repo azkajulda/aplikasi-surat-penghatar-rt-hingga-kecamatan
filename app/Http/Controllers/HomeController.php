@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('layouts.dashboard');
+        $page = 'Beranda';
+        return view('dashboard.beranda', compact('page'));
     }
 }
