@@ -67,7 +67,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{asset('./img/LOGO_KABUPATEN_KLATEN.png')}}" class="user-image" alt="User Image">
-              <span class="hidden-xs">{{ Auth::user()->no_nik }}</span>
+              <span class="hidden-xs">Muhammad Fuad Zulfikar</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -75,7 +75,7 @@
                 <img src="{{asset('./img/LOGO_KABUPATEN_KLATEN.png')}}" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
+                  Muhammad Fuad Zulfikar
                 </p>
               </li>
               <!-- Menu Footer-->
