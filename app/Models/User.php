@@ -19,7 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'id',
-        'no_nik',
+        'no_kk',
         'email',
         'role',
         'password',
@@ -44,8 +44,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function personal() {
-        return $this->hasOne(Personal::class, 'id_user', 'id');
+    public function list_keluarga() {
+        return $this->hasOne(ListKeluarga::class, 'id_user', 'id');
     }
     
     public function surat() {

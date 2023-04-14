@@ -9,7 +9,7 @@
 		</span>
 
 		<div class="wrap-input100 validate-input" data-validate = "@error('username') {{$message}} @enderror">
-			<input class="input100" placeholder="NIK / Email" id="username" type="text" name="username" value="{{ old('username') }}" required autofocus>
+			<input class="input100" placeholder="No Kartu Keluarga / Email" id="username" type="text" name="username" value="{{ old('username') }}" required autofocus>
 			<span class="focus-input100"></span>
 			<span class="symbol-input100">
 				<i class="fa fa-user-circle-o" aria-hidden="true"></i>
