@@ -13,11 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rts', function (Blueprint $table) {
+        Schema::create('list_keluargas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('id_rt');
+            $table->foreign('id_rt')->references('id')->on('rts')->onDelete('cascade');
             $table->unsignedBigInteger('id_rw');
             $table->foreign('id_rw')->references('id')->on('rws')->onDelete('cascade');
-            $table->string('nomor_rt');
+            $table->unsignedBigInteger('id_profile');
+            $table->foreign('id_profile')->references('id')->on('profiles')->onDelete('cascade');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -29,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rts');
+        Schema::dropIfExists('list_keluargas');
     }
 };

@@ -15,20 +15,18 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('id_rt');
-            $table->foreign('id_rt')->references('id')->on('rts')->onDelete('cascade');
-            $table->unsignedBigInteger('id_rw');
-            $table->foreign('id_rw')->references('id')->on('rws')->onDelete('cascade');
+            $table->string('no_nik')->unique();
             $table->string('nama');
+            $table->string('jenis_kelamin');
             $table->string('alamat');
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
+            $table->string('pendidikan');
             $table->string('pekerjaan');
             $table->string('agama');
             $table->string('ttd');
             $table->string('photo');
+            $table->string('golongan_darah');
             $table->timestamps();
         });
     }

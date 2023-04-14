@@ -30,6 +30,9 @@
 
   <link rel="stylesheet" href="{{asset('./dashboard-asset/customize.css')}}">
 
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{asset('./dashboard-asset/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -109,24 +112,43 @@
             <i class="fa fa-home"></i> <span>Beranda</span>
           </a>
         </li>
+        <li>
+          <a href="pages/widgets.html">
+            <i class="fa fa-pencil-square-o"></i> <span>Buat Surat Penhantar</span>
+          </a>
+        </li>
         <li class="{{$page === 'Surat' ? 'active' : ''}}">
           <a href="/surat-penghantar">
-            <i class="fa fa-file-text"></i> <span>Surat Penghantar</span>
+            <i class="fa fa-file-text"></i> <span>Daftar Pengajuan</span>
           </a>
         </li>
-        <li>
-          <a href="pages/widgets.html">
-            <i class="fa fa-book"></i> <span>Data Warga</span>
+        <li class="{{$page === 'Keluarga' ? 'active' : ''}}">
+          <a href="/data-keluarga">
+            <i class="fa fa-book"></i> <span>Data Keluarga</span>
           </a>
         </li>
+        
+        @if (Auth::user()->role === 'rt')
+          <li>
+            <a href="pages/widgets.html">
+              <i class="fa fa-book"></i> <span>Data Warga</span>
+            </a>
+          </li>
+          <li>
+            <a href="pages/widgets.html">
+              <i class="fa fa-book"></i> <span>Data RT & Warga</span>
+            </a>
+          </li>
+          <li>
+            <a href="pages/widgets.html">
+              <i class="fa fa-book"></i> <span>Data RW, RT, & Warga</span>
+            </a>
+          </li>          
+        @endif
+        
         <li>
-          <a href="pages/widgets.html">
-            <i class="fa fa-book"></i> <span>Data RT & Warga</span>
-          </a>
-        </li>
-        <li>
-          <a href="pages/widgets.html">
-            <i class="fa fa-book"></i> <span>Data RW, RT, & Warga</span>
+          <a href={{asset('./document/PanduanAplikasiSuratPenghantar.docx')}} download>
+            <i class="fa fa-info-circle "></i> <span>Panduan Aplikasi</span>
           </a>
         </li>
         <li>
@@ -165,7 +187,7 @@
   <footer class="main-footer footer-customize">
     <div class="row txt-white">
       <div class="col-md-6">
-        <h3>Sistem Informasi Layanan Surat Pengantar Kelurahan Bulang, Wonosari, Klaten.</h3>
+        <h3>Sistem Informasi Layanan Surat Pengantar Kelurahan Bulan, Wonosari, Klaten.</h3>
         <p>Aplikasi yang dapat digunakan dalam membantu masyarakat Bulan dalam membuat surat pengantar / surat keterangan.</p>
       </div>
       <div class="col-md-6">
@@ -415,5 +437,10 @@
 <script src="{{asset('./dashboard-asset/dist/js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('./dashboard-asset/dist/js/demo.js')}}"></script>
+<!-- DataTables -->
+<script src="{{asset('./dashboard-asset/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('./dashboard-asset/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+
+@yield('js-data-table')
 </body>
 </html>

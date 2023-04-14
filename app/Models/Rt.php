@@ -16,8 +16,8 @@ class Rt extends Model
         return $this->hasMany(Rw::class, 'id_rw', 'id');
     }
 
-    public function profile() {
-        return $this->belongsTo(Profile::class, 'id_rt', 'id');
+    public function list_keluarga() {
+        return $this->hasMany(ListKeluarga::class, 'id_rt', 'id');
     }
 
     public function ketua_rt() {

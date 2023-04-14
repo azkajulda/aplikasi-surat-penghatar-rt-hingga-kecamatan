@@ -13,7 +13,7 @@ class Surat extends Model
     protected $fillable = ['id', 'id_user', 'id_kepentingan', 'status', 'tanggal_permohonan'];
 
     public function user() {
-        return $this->belongsTo(Surat::class, 'id_user', 'id');
+        return $this->belongsTo(User::class, 'id_user', 'id');
     }
 
     public function kepentingan() {

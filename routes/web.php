@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ListKeluargaController;
 use App\Http\Controllers\SuratController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,4 @@ Auth::routes();
 
 Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
 Route::get('/surat-penghantar', [SuratController::class, 'index']);
+Route::get('/data-keluarga', [ListKeluargaController::class, 'index']);

@@ -10,14 +10,14 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-
+                        
                         <div class="row mb-3">
-                            <label for="no_nik" class="col-md-4 col-form-label text-md-end">{{ __('NIK') }}</label>
+                            <label for="no_kk" class="col-md-4 col-form-label text-md-end">{{ __('Nomor KK') }}</label>
 
                             <div class="col-md-6">
-                                <input id="no_nik" type="number" class="form-control @error('no_nik') is-invalid @enderror" name="no_nik" value="{{ old('no_nik') }}" required autocomplete="no_nik" autofocus>
+                                <input id="no_kk" type="number" class="form-control @error('no_kk') is-invalid @enderror" name="no_kk" value="{{ old('no_kk') }}" required autocomplete="no_kk" autofocus>
 
-                                @error('no_nik')
+                                @error('no_kk')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

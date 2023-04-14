@@ -54,7 +54,7 @@ class LoginController extends Controller
         if (filter_var($login, FILTER_VALIDATE_EMAIL)) {
             $field = 'email';
         } else {
-            $field = 'no_nik';
+            $field = 'no_kk';
         }
         
         request()->merge([$field => $login]);
