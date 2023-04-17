@@ -42,6 +42,8 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="{{asset('./dashboard-asset/https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic')}}">
+  
+  @yield('css-add-on')
 </head>
 <body class="hold-transition skin-blue fixed sidebar-mini">
 <div class="wrapper">
@@ -108,22 +110,22 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENU HALAMAN</li>
         <li class="{{$page === 'Beranda' ? 'active' : ''}}">
-          <a href="/dashboard">
+          <a href="{{route('beranda')}}">
             <i class="fa fa-home"></i> <span>Beranda</span>
           </a>
         </li>
         <li>
           <a href="pages/widgets.html">
-            <i class="fa fa-pencil-square-o"></i> <span>Buat Surat Penhantar</span>
+            <i class="fa fa-pencil-square-o"></i> <span>Buat Surat Penghantar</span>
           </a>
         </li>
         <li class="{{$page === 'Surat' ? 'active' : ''}}">
-          <a href="/surat-penghantar">
+          <a href="{{route('suratPenghantar')}}">
             <i class="fa fa-file-text"></i> <span>Daftar Pengajuan</span>
           </a>
         </li>
         <li class="{{$page === 'Keluarga' ? 'active' : ''}}">
-          <a href="/data-keluarga">
+          <a href="{{route('dataKeluarga')}}">
             <i class="fa fa-book"></i> <span>Data Keluarga</span>
           </a>
         </li>
@@ -441,6 +443,6 @@
 <script src="{{asset('./dashboard-asset/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('./dashboard-asset/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
 
-@yield('js-data-table')
+@yield('js-add-on')
 </body>
 </html>

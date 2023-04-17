@@ -7,8 +7,16 @@
     <div class="col-md-12">
       <!-- Custom Tabs -->
       <div class="box">
-        <div class="box-header">
-          <h3 class="box-title"></h3>
+        <div class="box-header mb-20">
+          <h3 class="box-title">Nomor Kartu Keluarga : {{Auth::user()->no_kk}}</h3>
+
+          <div class="box-tools">
+            <a href="{{route('addKeluarga')}}">
+              <button class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>
+                Tambah Anggota Keluarga
+              </button>
+            </a>
+          </div>
         </div>
         <div class="box-body">
           <table id="table-keluarga" class="table table-bordered table-striped" aria-describedby="table-keluarga">
@@ -17,7 +25,7 @@
                 <th>No</th>
                 <th>Nama Warga</th>
                 <th>Pejerkaan</th>
-                <th>TempatTanggal Lahir</th>
+                <th>Tempat, Tanggal Lahir</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>
@@ -70,7 +78,7 @@
   </div>
 @endsection
 
-@section('js-data-table')
+@section('js-add-on')
   <script>
     $(function () {
       $('#table-keluarga').DataTable({

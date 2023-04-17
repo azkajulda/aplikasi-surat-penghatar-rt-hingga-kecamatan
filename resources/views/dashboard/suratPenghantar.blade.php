@@ -220,7 +220,7 @@
   </div>
 @endsection
 
-@section('js-data-table')
+@section('js-add-on')
   <script>
     $(function () {
       $('#table-diajukan').DataTable({
