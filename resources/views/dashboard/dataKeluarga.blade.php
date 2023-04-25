@@ -19,6 +19,19 @@
           </div>
         </div>
         <div class="box-body">
+          @if (session('alert'))
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-ban"></i> Terjadi Kesalahan</h4>
+                {{ session('alert') }}
+              </div>
+          @elseif(session('success'))
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-check"></i> Berhasil</h4>
+                {{ session('success') }}
+              </div>
+          @endif
           <table id="table-keluarga" class="table table-bordered table-striped" aria-describedby="table-keluarga">
             <thead>
               <tr>
@@ -26,49 +39,37 @@
                 <th>Nama Warga</th>
                 <th>Pejerkaan</th>
                 <th>Tempat, Tanggal Lahir</th>
-                <th>Status</th>
+                <th>Jenis Kelamin</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>Agus Saepuloh</td>
-                <td>Buruh Lepas</td>
-                <td>Klaten, 20-12-1997</td>
-                <td>Kepala Keluarga</td>
-                <td class="text-center">
-                  <a href="">
-                    <button class="btn btn-warning"><i class="fa fa-pencil"></i>
-                      Edit
-                    </button>
-                  </a>
-                  <a href="">
-                    <button class="btn btn-danger"><i class="fa fa-trash"></i>
-                      Delete
-                    </button>
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Maemunah Yori</td>
-                <td>Ibu Rumah Tangag</td>
-                <td>Klaten, 20-12-1996</td>
-                <td>Istri</td>
-                <td class="text-center">
-                  <a href="">
-                    <button class="btn btn-warning"><i class="fa fa-pencil"></i>
-                      Edit
-                    </button>
-                  </a>
-                  <a href="">
-                    <button class="btn btn-danger"><i class="fa fa-trash"></i>
-                      Delete
-                    </button>
-                  </a>
-                </td>
-              </tr>
+              @foreach ( $listKeluargas as $listKeluarga)
+                <tr>
+                  <td>{{$loop->iteration}}</td>
+                  <td>{{$listKeluarga->profile->nama}}</td>
+                  <td>{{$listKeluarga->profile->pekerjaan}}</td>
+                  <td>{{$listKeluarga->profile->tempat_lahir .', '. date('d M Y', strtotime($listKeluarga->profile->tanggal_lahir))}}</td>
+                  <td>{{$listKeluarga->profile->jenis_kelamin}}</td>
+                  <td class="text-center">
+                    <a href={{route('profile', $listKeluarga->profile->id)}}>
+                      <button class="btn btn-success"><i class="fa fa-id-card"></i>
+                        Detail
+                      </button>
+                    </a>
+                    <a href={{route('editProfile', $listKeluarga->profile->id)}}>
+                      <button class="btn btn-warning"><i class="fa fa-pencil"></i>
+                        Edit
+                      </button>
+                    </a>
+                    <a href={{route('deleteKeluarga', $listKeluarga->id)}}>
+                      <button class="btn btn-danger"><i class="fa fa-trash"></i>
+                        Delete
+                      </button>
+                    </a>
+                  </td>
+                </tr>  
+              @endforeach
             </tbody>
           </table>
         </div>

@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('pekerjaan');
             $table->string('agama');
             $table->string('ttd');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->string('golongan_darah');
             $table->timestamps();
         });

@@ -24,13 +24,6 @@ class RwSeeder extends Seeder
             ['nomor_rw' => '004','created_at'=>$now, 'updated_at'=>$now],
             ['nomor_rw' => '005','created_at'=>$now, 'updated_at'=>$now],
             ['nomor_rw' => '006','created_at'=>$now, 'updated_at'=>$now],
-            ['nomor_rw' => '007','created_at'=>$now, 'updated_at'=>$now],
-            ['nomor_rw' => '008','created_at'=>$now, 'updated_at'=>$now],
-            ['nomor_rw' => '009','created_at'=>$now, 'updated_at'=>$now],
-            ['nomor_rw' => '010','created_at'=>$now, 'updated_at'=>$now],
-            ['nomor_rw' => '011','created_at'=>$now, 'updated_at'=>$now],
-            ['nomor_rw' => '012','created_at'=>$now, 'updated_at'=>$now],
-            ['nomor_rw' => '013','created_at'=>$now, 'updated_at'=>$now],
         ]);
     }
 }

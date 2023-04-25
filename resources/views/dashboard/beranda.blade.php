@@ -8,7 +8,7 @@
       <img class="image-beranda" src="{{asset('./img/online-teaching.png')}}" alt="beranda1">
     </div>
     <div class="col-md-4 text-center">
-      <h4>Sugeng Rawuh Riky Aditya</h4>
+      <h4>Sugeng Rawuh {{Auth::user()->list_keluarga->profile->nama}}</h4>
       <img class="img-logo-beranda" src="{{asset('./img/LOGO_KABUPATEN_KLATEN.png')}}" alt="beranda1">
       <p class="mb-34">Ajukan surat pengantar dengan mudah kapanpun dan dimanapun. klik tombol buat surat dibawah untuk memulai mengajukan surat anda.</p>
       <a href="/surat-penghantar">

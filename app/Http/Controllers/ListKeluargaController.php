@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\ListKeluarga;
+use App\Models\Profile;
 use App\Models\Rt;
 use App\Models\Rw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ListKeluargaController extends Controller
 {
@@ -18,7 +20,9 @@ class ListKeluargaController extends Controller
     public function index()
     {
         $page = 'Keluarga';
-        return view('dashboard.dataKeluarga', compact('page'));
+        $listKeluargas = ListKeluarga::where('id_user', Auth::user()->id)->get();
+        // dd($listKeluargas);
+        return view('dashboard.dataKeluarga', compact('page', 'listKeluargas'));
     }
 
     /**
@@ -48,33 +52,47 @@ class ListKeluargaController extends Controller
      */
     public function store(Request $request)
     {
-        $folderPath = public_path('upload/');
         $imageParts = explode(";base64,", $request->ttd);
         $imageTypeAux = explode("image/", $imageParts[0]);           
         $imageType = $imageTypeAux[1];
         $imageBase64 = base64_decode($imageParts[1]);
-        $file = $folderPath . uniqid() . '.'.$imageType;
+        $fileName = uniqid() . '.'.$imageType;
 
-        // file_put_contents($file, $imageBase64);
+        Storage::put('public/upload/signature/'.$fileName, $imageBase64);
 
         $listKeluarga = new ListKeluarga();
-        dd($request->all());
-        // try {
-        //     $listKeluarga->id_user = Auth::user()->id;
-        //     $listKeluarga->id_user = Auth::user()->id;
-        //     $listKeluarga->id_user = Auth::user()->id;
-        //     $listKeluarga->id_user = Auth::user()->id;
-        //     $listKeluarga->id_user = Auth::user()->id;
-        //     $listKeluarga->id_user = Auth::user()->id;
-        //     $listKeluarga->id_user = Auth::user()->id;
-        //     $listKeluarga->id_user = Auth::user()->id;
-        //     $listKeluarga->id_user = Auth::user()->id;
-        //     $listKeluarga->id_user = Auth::user()->id;
-        //     $listKeluarga->id_user = Auth::user()->id;
-        //     $listKeluarga->id_user = Auth::user()->id;
-        // } catch (\Throwable $th) {
-        //     //throw $th;
-        // }
+        $profile = new Profile();
+        try {
+            $filePhoto = $request->file('photo');
+            $path = null;
+            if($filePhoto){
+                $path = $filePhoto->store('public/upload/photo');
+                $profile->photo = url(Storage::url($path));
+            }
+
+            $profile->no_nik = $request->no_nik;
+            $profile->nama = $request->nama;
+            $profile->jenis_kelamin = $request->jenis_kelamin;
+            $profile->alamat = $request->alamat;
+            $profile->tempat_lahir = $request->tempat_lahir;
+            $profile->tanggal_lahir = $request->tanggal_lahir;
+            $profile->pendidikan = $request->pendidikan;
+            $profile->pekerjaan = $request->pekerjaan;
+            $profile->agama = $request->agama;
+            $profile->ttd = url(Storage::url('upload/signature/'.$fileName));
+            $profile->golongan_darah = $request->golongan_darah;
+            $profile->save();
+            
+            $listKeluarga->id_user = Auth::user()->id;
+            $listKeluarga->id_rt = $request->id_rt;
+            $listKeluarga->id_rw = $request->id_rw;
+            $listKeluarga->id_profile = $profile->id;
+            $listKeluarga->save();
+
+        } catch (\Throwable $th) {
+            return redirect()->route('dataKeluarga')->with('alert','Terjadi kesalahan, silahkan coba lagi!');
+        }
+        return redirect()->route('dataKeluarga')->with('success','Data Telah Masuk');
     }
 
     /**
@@ -117,8 +135,15 @@ class ListKeluargaController extends Controller
      * @param  \App\Models\ListKeluarga  $listKeluarga
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ListKeluarga $listKeluarga)
+    public function destroy($id)
     {
-        //
+        try {
+            $listKeluarga = ListKeluarga::findOrFail($id);
+            $listKeluarga->delete();
+        } catch (\Throwable $th) {
+            return redirect()->route('dataKeluarga')->with('alert','Terjadi kesalahan, silahkan coba lagi!');
+        }
+        return redirect()->route('dataKeluarga')->with('success','Data Telah Terhapus');
+        
     }
 }

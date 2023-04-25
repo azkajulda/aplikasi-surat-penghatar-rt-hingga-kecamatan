@@ -23,7 +23,6 @@ return new class extends Migration
             $table->foreign('id_rw')->references('id')->on('rws')->onDelete('cascade');
             $table->unsignedBigInteger('id_profile');
             $table->foreign('id_profile')->references('id')->on('profiles')->onDelete('cascade');
-            $table->string('status');
             $table->timestamps();
         });
     }

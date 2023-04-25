@@ -7,8 +7,16 @@
     margin-right: 33px;
 }
 
+.mr-10 {
+    margin-right: 10px;
+}
+
 .mb-20 {
     margin-bottom: 20px;
+}
+
+.w-full {
+    width: 100%;
 }
 
 
@@ -26,6 +34,12 @@
 .img-logo-beranda {
     margin: 26px 0px;
     width: 25%;
+}
+
+.img-profile {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
 }
 
 .btn-beranda {

@@ -10,7 +10,7 @@ class Profile extends Model
     use HasFactory;
 
     protected $table = 'profiles';
-    protected $fillable = ['id', 'no_nik','nama','jenis_kelamin','alamat','tempat_lahir','jenis_kelamin','alamat','tempat_lahir','pendidikan','pekerjaan','agama','ttd','photo','golongan_darah'];
+    protected $fillable = ['id', 'no_nik','nama','jenis_kelamin','alamat','tempat_lahir','tanggal_lahir','jenis_kelamin','alamat','pendidikan','pekerjaan','agama','ttd','photo','golongan_darah'];
 
     public function ketua_rt() {
         return $this->belongsTo(ListKetuaRt::class, 'id_rt', 'id');
@@ -21,7 +21,7 @@ class Profile extends Model
     }
     
     public function list_kelaurga() {
-        return $this->belongsTo(ListKeluarga::class, 'id_profile', 'id');
+        return $this->hasOne(ListKeluarga::class, 'id_profile', 'id');
     }
 
 

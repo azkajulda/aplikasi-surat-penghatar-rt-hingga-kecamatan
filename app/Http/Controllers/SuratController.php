@@ -25,7 +25,8 @@ class SuratController extends Controller
      */
     public function create()
     {
-        //
+        $page = "Tambah Surat";
+        return view('dashboard.suratPenghantar.addSuratPenghantar', compact('page'));
     }
 
     /**

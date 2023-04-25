@@ -72,7 +72,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{asset('./img/LOGO_KABUPATEN_KLATEN.png')}}" class="user-image" alt="User Image">
-              <span class="hidden-xs">Muhammad Fuad Zulfikar</span>
+              <span class="hidden-xs">{{Auth::user()->list_keluarga->profile?->nama ?? Auth::user()->no_kk}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -80,7 +80,7 @@
                 <img src="{{asset('./img/LOGO_KABUPATEN_KLATEN.png')}}" class="img-circle" alt="User Image">
 
                 <p>
-                  Muhammad Fuad Zulfikar
+                  {{Auth::user()->list_keluarga->profile?->nama ?? Auth::user()->no_kk}}
                 </p>
               </li>
               <!-- Menu Footer-->
@@ -114,8 +114,8 @@
             <i class="fa fa-home"></i> <span>Beranda</span>
           </a>
         </li>
-        <li>
-          <a href="pages/widgets.html">
+        <li class="{{$page === 'Tambah Surat' ? 'active' : ''}}">
+          <a href={{route('tambahSuratPenghantar')}}>
             <i class="fa fa-pencil-square-o"></i> <span>Buat Surat Penghantar</span>
           </a>
         </li>
@@ -153,8 +153,8 @@
             <i class="fa fa-info-circle "></i> <span>Panduan Aplikasi</span>
           </a>
         </li>
-        <li>
-          <a href="pages/widgets.html">
+        <li class="{{$page === 'Profile' ? 'active' : ''}}">
+          <a href={{route('profile', Auth::user()->list_keluarga->profile?->id ?? 'default')}}>
             <i class="fa fa-user"></i> <span>Profile</span>
           </a>
         </li>

@@ -10,7 +10,7 @@ class ListKeluarga extends Model
     use HasFactory;
 
     protected $table = 'list_keluargas';
-    protected $fillable = ['id', 'id_user', 'id_rt', 'id_rw', 'id_profile', 'status'];
+    protected $fillable = ['id', 'id_user', 'id_rt', 'id_rw', 'id_profile'];
 
     public function rw() {
         return $this->belongsTo(Rw::class, 'id_rw', 'id');
@@ -21,7 +21,7 @@ class ListKeluarga extends Model
     }
 
     public function profile() {
-        return $this->hasMany(Profile::class, 'id_profile', 'id');
+        return $this->belongsTo(Profile::class, 'id_profile', 'id');
     }
 
     public function user() {
