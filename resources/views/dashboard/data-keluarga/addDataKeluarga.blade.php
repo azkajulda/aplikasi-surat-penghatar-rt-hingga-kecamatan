@@ -20,7 +20,7 @@
 
           <div class="box-header">
             <h3 class="box-title">
-              <a href="{{route("dataKeluarga")}}">
+              <a href="{{url()->previous()}}">
                 <i class="fa fa-arrow-circle-left"></i> <span>Kembali</span>
               </a>
             </h3>
@@ -107,7 +107,7 @@
 
                 <div class="form-group col-md-3">
                   <label for="photo">Photo</label>
-                  <input type="file" id="photo" name="photo">
+                  <input type="file" id="photo" name="photo" accept="image/png, image/jpeg">
                 </div>
 
                 <div class="form-group col-md-3">
@@ -167,7 +167,7 @@
           $('#rt-state').html('');
 
           $.ajax({
-            url: "/data-keluarga/fetch-rt",
+            url: "{{route('fetchRt')}}",
             type: 'POST',
             dataType: 'json',
             data: {id_rw: idRw, _token:"{{csrf_token() }}"},

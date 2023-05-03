@@ -22,7 +22,12 @@ class ProfileController extends Controller
     public function index($id)
     {
         $page = 'Profile';
-        $profile = Profile::where('id', $id)->get();
+        $profile = null;
+        if(!Auth::user()->list_keluarga?->id){
+            $profile = null;
+        } else {
+            $profile = Profile::where('id', $id)->get();
+        }
 
         return view('dashboard.profile.detailProfile', compact('page', 'profile'));
     }

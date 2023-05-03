@@ -47,8 +47,9 @@ class User extends Authenticatable
     public function list_keluarga() {
         return $this->hasOne(ListKeluarga::class, 'id_user', 'id');
     }
-    
+
     public function surat() {
         return $this->hasMany(Surat::class, 'id_user', 'id');
-    }    
+    }
+        
 }

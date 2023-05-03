@@ -6,6 +6,7 @@ use App\Models\ListKeluarga;
 use App\Models\Profile;
 use App\Models\Rt;
 use App\Models\Rw;
+use App\Models\Surat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -21,7 +22,7 @@ class ListKeluargaController extends Controller
     {
         $page = 'Keluarga';
         $listKeluargas = ListKeluarga::where('id_user', Auth::user()->id)->get();
-        // dd($listKeluargas);
+
         return view('dashboard.dataKeluarga', compact('page', 'listKeluargas'));
     }
 

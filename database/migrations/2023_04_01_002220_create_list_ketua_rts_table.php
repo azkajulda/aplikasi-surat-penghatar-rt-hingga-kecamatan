@@ -14,10 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('list_ketua_rts', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('id_rt');
             $table->foreign('id_rt')->references('id')->on('rts')->onDelete('cascade');
             $table->unsignedBigInteger('id_profile');
             $table->foreign('id_profile')->references('id')->on('profiles')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

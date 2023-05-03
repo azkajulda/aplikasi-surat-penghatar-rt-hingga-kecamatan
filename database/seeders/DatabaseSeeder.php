@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RwSeeder::class,
             RtSeeder::class,
+            KeperluanSeeder::class,
         ]);
     }
 }

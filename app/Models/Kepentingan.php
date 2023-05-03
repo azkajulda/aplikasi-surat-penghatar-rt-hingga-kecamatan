@@ -13,7 +13,7 @@ class Kepentingan extends Model
     protected $fillable = ['id', 'jenis_kepentingan', 'deskripsi', 'keterangan'];
 
     public function surat() {
-        return $this->belongsTo(Surat::class, 'id_kepentingan', 'id');
+        return $this->hasMany(Surat::class, 'id_kepentingan', 'id');
     }
 
 }

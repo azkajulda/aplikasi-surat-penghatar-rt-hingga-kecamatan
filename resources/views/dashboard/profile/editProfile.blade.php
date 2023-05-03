@@ -20,7 +20,7 @@
 
           <div class="box-header">
             <h3 class="box-title">
-              <a href="{{route("dataKeluarga")}}">
+              <a href="{{url()->previous()}}">
                 <i class="fa fa-arrow-circle-left"></i> <span>Kembali</span>
               </a>
             </h3>

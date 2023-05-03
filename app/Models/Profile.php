@@ -24,5 +24,7 @@ class Profile extends Model
         return $this->hasOne(ListKeluarga::class, 'id_profile', 'id');
     }
 
-
+    public function surat() {
+        return $this->hasMany(Surat::class, 'id_profile', 'id');
+    }
 }
