@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function (){
         Route::get('/edit/{id}', [SuratController::class, 'edit'])->name('editSuratPenghantar');
         Route::post('/update/{id}', [SuratController::class, 'update'])->name('updateSuratPenghantar');
         Route::post('/fetch-profile', [SuratController::class, 'fetchProfile'])->name('fetchProfile');
+        Route::post('/fetch-berkas', [SuratController::class, 'fetchBerkas'])->name('fetchBerkas');
         Route::get('/batalkan/{id}', [SuratController::class, 'destroy'])->name('batalkanSurat');
         
         Route::get('/surat-rt-rw/{id}', [SuratController::class, 'show'])->name('suratRtRw');

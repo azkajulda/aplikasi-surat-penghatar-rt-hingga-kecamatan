@@ -55,6 +55,13 @@ class SuratController extends Controller
         return response()->json($data);
     }
 
+    public function fetchBerkas(Request $request)
+    {
+        $data['kepentingan'] = Kepentingan::where('id', $request->id_kepentingan)->get();
+        // dd($data);
+        return response()->json($data);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

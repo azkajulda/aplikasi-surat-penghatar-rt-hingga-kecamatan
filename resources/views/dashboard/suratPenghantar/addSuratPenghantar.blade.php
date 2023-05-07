@@ -46,7 +46,7 @@
                     <select class="form-control" name="id_profile" id="profile_state" required>
                       <option value="">&mdash;Pilih Nama Pengaju Surat&mdash;</option>
                       @foreach ( $listKeluargas as $listKeluarga)
-                        <option value="{{$listKeluarga->id}}">{{$listKeluarga->profile->nama}}</option>
+                        <option value="{{$listKeluarga->id_profile}}">{{$listKeluarga->profile->nama}}</option>
                       @endforeach
                     </select>
                   </div>
@@ -77,11 +77,11 @@
                     <div id="notes-berkas"></div>
                   </div>
                   <div class="form-group col-md-8">
-                    <label for="tipe_berkas">Tipe Berkas*</label>
+                    <label for="tipe_berkas">Tipe Surat*</label>
                     <div id="tipe_berkas">
-                      <label class="radio-inline"><input type="radio" name="tipe_berkas" value="Pribadi" required>Pribadi</label>
-                      <label class="radio-inline"><input type="radio" name="tipe_berkas" value="RT/RW" required>RT/RW</label>
-                      <label class="radio-inline"><input type="radio" name="tipe_berkas" value="Kelurahan" required>Kelurahan</label>
+                      <label class="radio-inline"><input type="radio" name="tipe_berkas" value="RT/RW" required>Surat Penghantar RT/RW</label>
+                      <label class="radio-inline"><input type="radio" name="tipe_berkas" value="Kelurahan" required>Surat Keterangan Kelurahan</label>
+                      <div id="notes-surat"></div>
                     </div>
                   </div>
                 </div>  
@@ -109,17 +109,35 @@
     $(document).ready(function() {
       $('#keperluanSurat').change(function(event) {
         const idKepentingan = this.value;
-
         $('#notes-berkas').html('');
-        switch (idKepentingan) {
-          case "3":
-            $('#notes-berkas').append('<p class="help-block txt-red">* Unggah File KTP, Kartu Keluarga, dan Akta Cerai / Surat Kematian untuk keterangan Janda/Duda *(.jpg, .png, .pdf)</p>');
-            break;
-            
-            default:
-            $('#notes-berkas').append('<p class="help-block txt-red">* Unggah File KTP dan Kartu Keluarga *(.jpg, .png, .pdf)</p>');
-            break;
-        }
+
+        $.ajax({
+          url: "{{route('fetchBerkas')}}",
+          type: 'POST',
+          dataType: 'json',
+          data: {id_kepentingan: idKepentingan, _token:"{{csrf_token() }}"},
+          success: function(response){
+            $.each(response.kepentingan,function(index, val){
+              $('#notes-berkas').append('<p class="help-block txt-red">* Unggah ' + val.keterangan  + ' *(.jpg, .png, .pdf)</p>');
+            });
+          }
+        });
+
+      });
+
+      $('input[name=tipe_berkas]').change(function(event) {
+        const typeSurat = this.value;
+        $('#notes-surat').html('');
+
+        switch (typeSurat) {
+            case "RT/RW":
+              $('#notes-surat').append('<p class="help-block txt-red">* Anda dapat mencetak surat secara mandiri</p>');
+              break;
+              
+              default:
+              $('#notes-surat').append('<p class="help-block txt-red">* Silahkan mengambil surat di kelurahan</p>');
+              break;
+          }
 
       });
 

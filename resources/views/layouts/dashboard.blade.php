@@ -114,38 +114,68 @@
             <i class="fa fa-home"></i> <span>Beranda</span>
           </a>
         </li>
-        <li class="{{$page === 'Tambah Surat' ? 'active' : ''}}">
-          <a href={{route('tambahSuratPenghantar')}}>
-            <i class="fa fa-pencil-square-o"></i> <span>Buat Surat Penghantar</span>
-          </a>
-        </li>
-        <li class="{{$page === 'Surat' ? 'active' : ''}}">
-          <a href="{{route('suratPenghantar')}}">
-            <i class="fa fa-file-text"></i> <span>Daftar Pengajuan</span>
-          </a>
-        </li>
-        <li class="{{$page === 'Keluarga' ? 'active' : ''}}">
-          <a href="{{route('dataKeluarga')}}">
-            <i class="fa fa-book"></i> <span>Data Keluarga</span>
-          </a>
-        </li>
-        
-        @if (Auth::user()->role === 'rt')
+
+        @if (Auth::user()->role === 'warga')
+          <li class="{{$page === 'Tambah Surat' ? 'active' : ''}}">
+            <a href={{route('tambahSuratPenghantar')}}>
+              <i class="fa fa-pencil-square-o"></i> <span>Buat Surat Penghantar</span>
+            </a>
+          </li>
+          <li class="{{$page === 'Surat' ? 'active' : ''}}">
+            <a href="{{route('suratPenghantar')}}">
+              <i class="fa fa-file-text"></i> <span>Daftar Pengajuan</span>
+            </a>
+          </li>
+          <li class="{{$page === 'Keluarga' ? 'active' : ''}}">
+            <a href="{{route('dataKeluarga')}}">
+              <i class="fa fa-book"></i> <span>Data Keluarga</span>
+            </a>
+          </li>
+        @endif
+
+        @if (Auth::user()->role === 'rt' || Auth::user()->role === 'rw')
+
+          @if (Auth::user()->role === 'rt')
+            <li>
+              <a href="pages/widgets.html">
+                <i class="fa fa-pencil-square-o"></i> <span>Registrasi Warga</span>
+              </a>
+            </li> 
+          @endif
+
           <li>
             <a href="pages/widgets.html">
               <i class="fa fa-book"></i> <span>Data Warga</span>
             </a>
-          </li>
+          </li> 
           <li>
             <a href="pages/widgets.html">
-              <i class="fa fa-book"></i> <span>Data RT & Warga</span>
+              <i class="fa fa-file-text"></i> <span>Data Pengajuan</span>
             </a>
-          </li>
+          </li>      
+        @endif
+
+        @if (Auth::user()->role === 'lurah')
           <li>
             <a href="pages/widgets.html">
-              <i class="fa fa-book"></i> <span>Data RW, RT, & Warga</span>
+              <i class="fa fa-pencil-square-o"></i> <span>Registrasi Ketua RT RW</span>
             </a>
-          </li>          
+          </li> 
+          <li>
+            <a href="pages/widgets.html">
+              <i class="fa fa-book"></i> <span>Data Ketua RT RW</span>
+            </a>
+          </li> 
+          <li>
+            <a href="pages/widgets.html">
+              <i class="fa fa-file-text"></i> <span>Data Pengajuan</span>
+            </a>
+          </li> 
+          <li>
+            <a href="pages/widgets.html">
+              <i class="fa fa-book"></i> <span>Data Surat Kepentingan</span>
+            </a>
+          </li> 
         @endif
         
         <li>

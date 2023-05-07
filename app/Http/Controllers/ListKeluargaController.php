@@ -91,9 +91,17 @@ class ListKeluargaController extends Controller
             $listKeluarga->save();
 
         } catch (\Throwable $th) {
-            return redirect()->route('dataKeluarga')->with('alert','Terjadi kesalahan, silahkan coba lagi!');
+            if (Auth::user()->role !== 'warga'){
+                return redirect()->route('profile', Auth::user()->list_keluarga->profile?->id ?? 0)->with('alert','Terjadi kesalahan, silahkan coba lagi!.');
+            } else {
+                return redirect()->route('dataKeluarga')->with('alert','Terjadi kesalahan, silahkan coba lagi!');
+            }
         }
-        return redirect()->route('dataKeluarga')->with('success','Data Telah Masuk');
+        if (Auth::user()->role !== 'warga'){
+            return redirect()->route('profile', $profile->id)->with('success','Data Telah Masuk');
+        } else {
+            return redirect()->route('dataKeluarga')->with('success','Data Telah Masuk');
+        }
     }
 
     /**
