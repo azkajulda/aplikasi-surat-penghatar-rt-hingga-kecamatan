@@ -31,7 +31,14 @@ Route::middleware(['auth'])->group(function (){
     Route::prefix('surat-penghantar')->group(function () {
         Route::get('/', [SuratController::class, 'index'])->name('suratPenghantar');
         Route::get('/tambah', [SuratController::class, 'create'])->name('tambahSuratPenghantar');
-
+        Route::post('/add', [SuratController::class, 'store'])->name('addSuratPenghantar');
+        Route::get('/edit/{id}', [SuratController::class, 'edit'])->name('editSuratPenghantar');
+        Route::post('/update/{id}', [SuratController::class, 'update'])->name('updateSuratPenghantar');
+        Route::post('/fetch-profile', [SuratController::class, 'fetchProfile'])->name('fetchProfile');
+        Route::post('/fetch-berkas', [SuratController::class, 'fetchBerkas'])->name('fetchBerkas');
+        Route::get('/batalkan/{id}', [SuratController::class, 'destroy'])->name('batalkanSurat');
+        
+        Route::get('/surat-rt-rw/{id}', [SuratController::class, 'show'])->name('suratRtRw');
     });
 
     Route::prefix('data-keluarga')->group(function () {

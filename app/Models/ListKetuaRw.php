@@ -18,6 +18,6 @@ class ListKetuaRw extends Model
 
     
     public function profile() {
-        return $this->hasOne(Profile::class, 'id_profile', 'id');
+        return $this->belongsTo(Profile::class, 'id_profile', 'id');
     }
 }

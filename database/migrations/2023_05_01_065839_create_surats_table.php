@@ -17,10 +17,15 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('id_profile');
+            $table->foreign('id_profile')->references('id')->on('profiles')->onDelete('cascade');
             $table->unsignedBigInteger('id_kepentingan');
             $table->foreign('id_kepentingan')->references('id')->on('kepentingans')->onDelete('cascade');
             $table->string('status');
+            $table->string('keterangan_penolakan')->nullable();
             $table->date('tanggal_permohonan');
+            $table->json('berkas');
+            $table->string('tipe_berkas');
             $table->timestamps();
         });
     }

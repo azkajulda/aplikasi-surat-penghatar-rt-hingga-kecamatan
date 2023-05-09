@@ -71,13 +71,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{asset('./img/LOGO_KABUPATEN_KLATEN.png')}}" class="user-image" alt="User Image">
+              <img src="{{Auth::user()->list_keluarga->profile?->photo ?? asset('./img/default_user.png')}}" class="user-image" alt="User Image">
               <span class="hidden-xs">{{Auth::user()->list_keluarga->profile?->nama ?? Auth::user()->no_kk}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="{{asset('./img/LOGO_KABUPATEN_KLATEN.png')}}" class="img-circle" alt="User Image">
+                <img src="{{Auth::user()->list_keluarga->profile?->photo ?? asset('./img/default_user.png')}}" class="img-circle" alt="User Image">
 
                 <p>
                   {{Auth::user()->list_keluarga->profile?->nama ?? Auth::user()->no_kk}}
@@ -86,10 +86,10 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href={{route('profile', Auth::user()->list_keluarga->profile?->id ?? 0)}} class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="{{ route('logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sign out</a>
+                  <a href="{{ route('logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Keluar</a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                       @csrf
                   </form>
@@ -114,38 +114,68 @@
             <i class="fa fa-home"></i> <span>Beranda</span>
           </a>
         </li>
-        <li class="{{$page === 'Tambah Surat' ? 'active' : ''}}">
-          <a href={{route('tambahSuratPenghantar')}}>
-            <i class="fa fa-pencil-square-o"></i> <span>Buat Surat Penghantar</span>
-          </a>
-        </li>
-        <li class="{{$page === 'Surat' ? 'active' : ''}}">
-          <a href="{{route('suratPenghantar')}}">
-            <i class="fa fa-file-text"></i> <span>Daftar Pengajuan</span>
-          </a>
-        </li>
-        <li class="{{$page === 'Keluarga' ? 'active' : ''}}">
-          <a href="{{route('dataKeluarga')}}">
-            <i class="fa fa-book"></i> <span>Data Keluarga</span>
-          </a>
-        </li>
-        
-        @if (Auth::user()->role === 'rt')
+
+        @if (Auth::user()->role === 'warga')
+          <li class="{{$page === 'Tambah Surat' ? 'active' : ''}}">
+            <a href={{route('tambahSuratPenghantar')}}>
+              <i class="fa fa-pencil-square-o"></i> <span>Buat Surat Penghantar</span>
+            </a>
+          </li>
+          <li class="{{$page === 'Surat' ? 'active' : ''}}">
+            <a href="{{route('suratPenghantar')}}">
+              <i class="fa fa-file-text"></i> <span>Daftar Pengajuan</span>
+            </a>
+          </li>
+          <li class="{{$page === 'Keluarga' ? 'active' : ''}}">
+            <a href="{{route('dataKeluarga')}}">
+              <i class="fa fa-book"></i> <span>Data Keluarga</span>
+            </a>
+          </li>
+        @endif
+
+        @if (Auth::user()->role === 'rt' || Auth::user()->role === 'rw')
+
+          @if (Auth::user()->role === 'rt')
+            <li>
+              <a href="pages/widgets.html">
+                <i class="fa fa-pencil-square-o"></i> <span>Registrasi Warga</span>
+              </a>
+            </li> 
+          @endif
+
           <li>
             <a href="pages/widgets.html">
               <i class="fa fa-book"></i> <span>Data Warga</span>
             </a>
-          </li>
+          </li> 
           <li>
             <a href="pages/widgets.html">
-              <i class="fa fa-book"></i> <span>Data RT & Warga</span>
+              <i class="fa fa-file-text"></i> <span>Data Pengajuan</span>
             </a>
-          </li>
+          </li>      
+        @endif
+
+        @if (Auth::user()->role === 'lurah')
           <li>
             <a href="pages/widgets.html">
-              <i class="fa fa-book"></i> <span>Data RW, RT, & Warga</span>
+              <i class="fa fa-pencil-square-o"></i> <span>Registrasi Ketua RT RW</span>
             </a>
-          </li>          
+          </li> 
+          <li>
+            <a href="pages/widgets.html">
+              <i class="fa fa-book"></i> <span>Data Ketua RT RW</span>
+            </a>
+          </li> 
+          <li>
+            <a href="pages/widgets.html">
+              <i class="fa fa-file-text"></i> <span>Data Pengajuan</span>
+            </a>
+          </li> 
+          <li>
+            <a href="pages/widgets.html">
+              <i class="fa fa-book"></i> <span>Data Surat Kepentingan</span>
+            </a>
+          </li> 
         @endif
         
         <li>
@@ -154,7 +184,7 @@
           </a>
         </li>
         <li class="{{$page === 'Profile' ? 'active' : ''}}">
-          <a href={{route('profile', Auth::user()->list_keluarga->profile?->id ?? 'default')}}>
+          <a href={{route('profile', Auth::user()->list_keluarga->profile?->id ?? 0)}}>
             <i class="fa fa-user"></i> <span>Profile</span>
           </a>
         </li>

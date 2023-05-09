@@ -18,7 +18,7 @@
             </a>
           </div>
         </div>
-        <div class="box-body">
+        <div class="box-body table-responsive">
           @if (session('alert'))
             <div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -51,22 +51,28 @@
                   <td>{{$listKeluarga->profile->pekerjaan}}</td>
                   <td>{{$listKeluarga->profile->tempat_lahir .', '. date('d M Y', strtotime($listKeluarga->profile->tanggal_lahir))}}</td>
                   <td>{{$listKeluarga->profile->jenis_kelamin}}</td>
-                  <td class="text-center">
+                  <td class="text-center w-300">
                     <a href={{route('profile', $listKeluarga->profile->id)}}>
-                      <button class="btn btn-success"><i class="fa fa-id-card"></i>
+                      <button class="btn btn-success w-80"><i class="fa fa-id-card"></i>
                         Detail
                       </button>
                     </a>
                     <a href={{route('editProfile', $listKeluarga->profile->id)}}>
-                      <button class="btn btn-warning"><i class="fa fa-pencil"></i>
+                      <button class="btn btn-warning w-80"><i class="fa fa-pencil"></i>
                         Edit
                       </button>
                     </a>
-                    <a href={{route('deleteKeluarga', $listKeluarga->id)}}>
-                      <button class="btn btn-danger"><i class="fa fa-trash"></i>
+                    @if (count($listKeluarga->profile->surat) > 0)
+                      <button class="btn btn-danger w-80" data-toggle="modal" data-target="#modal-cant-delete"><i class="fa fa-trash"></i>
                         Delete
                       </button>
-                    </a>
+                    @else
+                      <a href={{route('deleteKeluarga', $listKeluarga->id)}}>
+                        <button class="btn btn-danger w-80"><i class="fa fa-trash"></i>
+                          Delete
+                        </button>
+                      </a>
+                    @endif
                   </td>
                 </tr>  
               @endforeach
@@ -76,6 +82,26 @@
       </div>
       <!-- nav-tabs-custom -->
     </div>
+  </div>
+
+  <div class="modal modal-danger fade" id="modal-cant-delete">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Gagal!</h4>
+        </div>
+        <div class="modal-body">
+          <p>Tidak bisa menghapus anggota keluarga jika sedang mengajukan surat penghantar </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
   </div>
 @endsection
 

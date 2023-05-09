@@ -1,6 +1,14 @@
 /* Utility */
+.m-0{
+    margin: 0;
+}
+
+.m-auto{
+    margin: auto;
+}
+
 .my-20 {
-    margin: 20px 0px;
+    margin: 20px 0px !important;
 }
 
 .mr-33 {
@@ -11,8 +19,40 @@
     margin-right: 10px;
 }
 
+.mr-5 {
+    margin-right: 5px;
+}
+
 .mb-20 {
     margin-bottom: 20px;
+}
+
+.mt-20 {
+    margin-top: 20px !important;
+}
+
+.w-80 {
+    width: 80px;
+}
+
+.w-300 {
+    width: 300px;
+}
+
+.w-20p {
+    width: 20%;
+}
+
+.w-40p {
+    width: 40%;
+}
+
+.w-70p {
+    width: 70%;
+}
+
+.w-95p {
+    width: 95%;
 }
 
 .w-full {
@@ -23,6 +63,55 @@
 /* Comonent */
 .txt-white {
     color: #fff;
+}
+.txt-red {
+    color: #dd4b39;
+}
+
+.title-kop-surat {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 24px;
+    font-weight: 800;
+    margin: 0px;
+} 
+
+.title-rt-rw {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 26px;
+    font-weight: 800;
+}
+
+.txt-kop-surat {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 16px;
+    margin: 0px;
+}
+
+.txt-judul-surat {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 20px;
+    font-weight: 800;
+    text-decoration: underline;
+    margin: 0px;
+    text-align: center;
+}
+
+.divider-kop-1 { 
+    border-top: 1px solid #000000;
+    margin-bottom: 2px;
+}
+
+.divider-kop-2 { 
+    border: 2px solid #000000;
+    margin-top: 0px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-justify {
+    text-align: justify;
 }
 
 .image-beranda {
@@ -42,8 +131,17 @@
     object-fit: cover;
 }
 
+.img-kop-surat {
+    height: 115px;
+}
+
 .btn-beranda {
     width: 40%;
+    margin: 34px auto;
+}
+
+.btn-beranda-admin {
+    width: 50%;
     margin: 34px auto;
 }
 

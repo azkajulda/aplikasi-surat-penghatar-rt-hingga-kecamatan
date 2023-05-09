@@ -6,6 +6,7 @@ use App\Models\ListKeluarga;
 use App\Models\Profile;
 use App\Models\Rt;
 use App\Models\Rw;
+use App\Models\Surat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -21,7 +22,7 @@ class ListKeluargaController extends Controller
     {
         $page = 'Keluarga';
         $listKeluargas = ListKeluarga::where('id_user', Auth::user()->id)->get();
-        // dd($listKeluargas);
+
         return view('dashboard.dataKeluarga', compact('page', 'listKeluargas'));
     }
 
@@ -90,9 +91,17 @@ class ListKeluargaController extends Controller
             $listKeluarga->save();
 
         } catch (\Throwable $th) {
-            return redirect()->route('dataKeluarga')->with('alert','Terjadi kesalahan, silahkan coba lagi!');
+            if (Auth::user()->role !== 'warga'){
+                return redirect()->route('profile', Auth::user()->list_keluarga->profile?->id ?? 0)->with('alert','Terjadi kesalahan, silahkan coba lagi!.');
+            } else {
+                return redirect()->route('dataKeluarga')->with('alert','Terjadi kesalahan, silahkan coba lagi!');
+            }
         }
-        return redirect()->route('dataKeluarga')->with('success','Data Telah Masuk');
+        if (Auth::user()->role !== 'warga'){
+            return redirect()->route('profile', $profile->id)->with('success','Data Telah Masuk');
+        } else {
+            return redirect()->route('dataKeluarga')->with('success','Data Telah Masuk');
+        }
     }
 
     /**

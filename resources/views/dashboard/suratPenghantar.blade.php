@@ -6,6 +6,19 @@
   <div class="row">
     <div class="col-md-12">
       <!-- Custom Tabs -->
+      @if (session('alert'))
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-ban"></i> Terjadi Kesalahan</h4>
+            {{ session('alert') }}
+          </div>
+      @elseif(session('success'))
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-check"></i> Berhasil</h4>
+            {{ session('success') }}
+          </div>
+      @endif
       <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
           <li class="active"><a href="#tab_1" data-toggle="tab">Sedang Diajukan</a></li>
@@ -22,86 +35,37 @@
                     <th>NIK</th>
                     <th>Keperluan</th>
                     <th>Status</th>
+                    {{-- <th>Berkas</th> --}}
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>30-01-2023</td>
-                    <td>32032131231231</td>
-                    <td>Surat Miskin</td>
-                    <td>Menunggu ACC</td>
-                    <td class="text-center">
-                      <a href="">
-                        <button class="btn btn-warning"><i class="fa fa-pencil"></i>
-                          Edit
-                        </button>
-                      </a>
-                      <a href="">
-                        <button class="btn btn-danger"><i class="fa fa-trash"></i>
-                          Batalkan
-                        </button>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>30-01-2023</td>
-                    <td>32032131231231</td>
-                    <td>Pembuatan SKCK</td>
-                    <td>Menunggu ACC</td>
-                    <td class="text-center">
-                      <a href="">
-                        <button class="btn btn-warning"><i class="fa fa-pencil"></i>
-                          Edit
-                        </button>
-                      </a>
-                      <a href="">
-                        <button class="btn btn-danger"><i class="fa fa-trash"></i>
-                          Batalkan
-                        </button>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>30-01-2023</td>
-                    <td>32032131231231</td>
-                    <td>Surat Keterangan</td>
-                    <td>Menunggu ACC</td>
-                    <td class="text-center">
-                      <a href="">
-                        <button class="btn btn-warning"><i class="fa fa-pencil"></i>
-                          Edit
-                        </button>
-                      </a>
-                      <a href="">
-                        <button class="btn btn-danger"><i class="fa fa-trash"></i>
-                          Batalkan
-                        </button>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>30-01-2023</td>
-                    <td>32032131231231</td>
-                    <td>Pembuatan SKCK</td>
-                    <td>Menunggu ACC</td>
-                    <td class="text-center">
-                      <a href="">
-                        <button class="btn btn-warning"><i class="fa fa-pencil"></i>
-                          Edit
-                        </button>
-                      </a>
-                      <a href="">
-                        <button class="btn btn-danger"><i class="fa fa-trash"></i>
-                          Batalkan
-                        </button>
-                      </a>
-                    </td>
-                  </tr>
+                  @foreach ($suratPending as $dataPending)
+                    <tr>
+                      <td>{{$loop->iteration}}</td>
+                      <td>{{$dataPending->tanggal_permohonan}}</td>
+                      <td>{{$dataPending->profile->no_nik}}</td>
+                      <td>{{$dataPending->kepentingan->jenis_kepentingan}}</td>
+                      <td>{{$dataPending->status}}</td>
+                      {{-- <td>
+                        @foreach (json_decode($dataPending->berkas) as $dataBerkas)
+                          <img src="{{$dataBerkas}}" alt="" class="w-80">
+                        @endforeach
+                      </td> --}}
+                      <td class="text-center">
+                        <a href="{{route('editSuratPenghantar', $dataPending->id)}}">
+                          <button class="btn btn-warning"><i class="fa fa-pencil"></i>
+                            Edit
+                          </button>
+                        </a>
+                        <a href="{{route('batalkanSurat', $dataPending->id)}}">
+                          <button class="btn btn-danger"><i class="fa fa-trash"></i>
+                            Batalkan
+                          </button>
+                        </a>
+                      </td>
+                    </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -117,101 +81,36 @@
                     <th>NIK</th>
                     <th>Keperluan</th>
                     <th>Status</th>
+                    {{-- <th>berkas</th> --}}
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>01-01-2023</td>
-                    <td>32032131231231</td>
-                    <td>Pembuatan SKCK</td>
-                    <td>Approved</td>
-                    <td class="text-center" style="width: 100px">
-                      <a href="">
-                        <button class="btn btn-success"><i class="fa fa-pencil"></i>
-                          Cetak
-                        </button>
-                      </a>
-                      <a href="">
-                        <button class="btn btn-danger"><i class="fa fa-trash"></i>
-                          Delete
-                        </button>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>30-02-2023</td>
-                    <td>344444444444</td>
-                    <td>Surat Miskin</td>
-                    <td>Approved</td>
-                    <td class="text-center" style="width: 100px">
-                      <a href="">
-                        <button class="btn btn-success"><i class="fa fa-pencil"></i>
-                          Cetak
-                        </button>
-                      </a>
-                      <a href="">
-                        <button class="btn btn-danger"><i class="fa fa-trash"></i>
-                          Delete
-                        </button>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>30-01-2023</td>
-                    <td>32032131231231</td>
-                    <td>Surat Keterangan</td>
-                    <td>Approved</td>
-                    <td class="text-center" style="width: 100px">
-                      <a href="">
-                        <button class="btn btn-success"><i class="fa fa-pencil"></i>
-                          Cetak
-                        </button>
-                      </a>
-                      <a href="">
-                        <button class="btn btn-danger"><i class="fa fa-trash"></i>
-                          Delete
-                        </button>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>30-01-2023</td>
-                    <td>32032131231231</td>
-                    <td>Pembuatan SKCK</td>
-                    <td>Approved</td>
-                    <td class="text-center" style="width: 100px">
-                      <a href="">
-                        <button class="btn btn-success"><i class="fa fa-pencil"></i>
-                          Cetak
-                        </button>
-                      </a>
-                      <a href="">
-                        <button class="btn btn-danger"><i class="fa fa-trash"></i>
-                          Delete
-                        </button>
-                      </a>
-                    </td>
-                  </tr>
+                  @foreach ($suratApproved as $dataApproved)
+                    <tr>
+                      <td>{{$loop->iteration}}</td>
+                      <td>{{$dataApproved->tanggal_permohonan}}</td>
+                      <td>{{$dataApproved->profile->no_nik}}</td>
+                      <td>{{$dataApproved->kepentingan->jenis_kepentingan}}</td>
+                      <td>{{$dataApproved->status}}</td>
+                      {{-- <td>
+                        @foreach (json_decode($dataApproved->berkas) as $dataBerkas)
+                          <img src="{{$dataBerkas}}" alt="" class="w-80">
+                        @endforeach
+                      </td> --}}
+                      <td class="text-center">
+                        <a href="{{route('suratRtRw', $dataApproved->id)}}">
+                          <button class="btn btn-success"><i class="fa fa-print"></i>
+                            Cetak
+                          </button>
+                        </a>
+                      </td>
+                    </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
           </div>
-          <!-- /.tab-pane -->
-          <div class="tab-pane" id="tab_3">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            It has survived not only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-            sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-            like Aldus PageMaker including versions of Lorem Ipsum.
-          </div>
-          <!-- /.tab-pane -->
         </div>
         <!-- /.tab-content -->
       </div>
