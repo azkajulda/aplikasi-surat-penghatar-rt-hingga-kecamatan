@@ -14,7 +14,10 @@ class ListKetuaRwController extends Controller
      */
     public function index()
     {
-        //
+        $page = 'RT/RW';
+        $listKetuaRW = ListKetuaRw::orderBy('id_rw', 'asc')->get();
+
+        return view('dashboard.data-rt-rw.listRw', compact('page', 'listKetuaRW'));
     }
 
     /**
@@ -46,7 +49,7 @@ class ListKetuaRwController extends Controller
      */
     public function show(ListKetuaRw $listKetuaRw)
     {
-        //
+        
     }
 
     /**
@@ -55,9 +58,11 @@ class ListKetuaRwController extends Controller
      * @param  \App\Models\ListKetuaRw  $listKetuaRw
      * @return \Illuminate\Http\Response
      */
-    public function edit(ListKetuaRw $listKetuaRw)
+    public function edit($id)
     {
-        //
+        $page = 'RT/RW';
+
+        return view('dashboard.data-rt-rw.editRtRw', compact('page'));
     }
 
     /**

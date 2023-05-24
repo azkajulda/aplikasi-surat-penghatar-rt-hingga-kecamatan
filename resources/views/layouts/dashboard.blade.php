@@ -148,32 +148,32 @@
               <i class="fa fa-book"></i> <span>Data Warga</span>
             </a>
           </li> 
-          <li>
-            <a href="pages/widgets.html">
+          <li class="{{$page === 'Surat' ? 'active' : ''}}">
+            <a href="{{route('dataPengajuan')}}">
               <i class="fa fa-file-text"></i> <span>Data Pengajuan</span>
             </a>
           </li>      
         @endif
 
         @if (Auth::user()->role === 'lurah')
-          <li>
-            <a href="pages/widgets.html">
+          <li class="{{$page === 'Registrasi RT/RW' ? 'active' : ''}}">
+            <a href="{{route('registrasiRTRW')}}">
               <i class="fa fa-pencil-square-o"></i> <span>Registrasi Ketua RT RW</span>
             </a>
           </li> 
-          <li>
-            <a href="pages/widgets.html">
+          <li class="{{$page === 'RT/RW' ? 'active' : ''}}">
+            <a href="{{route('listRw')}}">
               <i class="fa fa-book"></i> <span>Data Ketua RT RW</span>
             </a>
           </li> 
-          <li>
-            <a href="pages/widgets.html">
+          <li class="{{$page === 'Surat' ? 'active' : ''}}">
+            <a href="{{route('dataPengajuan')}}">
               <i class="fa fa-file-text"></i> <span>Data Pengajuan</span>
             </a>
           </li> 
-          <li>
-            <a href="pages/widgets.html">
-              <i class="fa fa-book"></i> <span>Data Surat Kepentingan</span>
+          <li class="{{$page === 'Kepentingan' ? 'active' : ''}}">
+            <a href="{{route('kepentingan')}}">
+              <i class="fa fa-book"></i> <span>Data Kepentingan Surat</span>
             </a>
           </li> 
         @endif

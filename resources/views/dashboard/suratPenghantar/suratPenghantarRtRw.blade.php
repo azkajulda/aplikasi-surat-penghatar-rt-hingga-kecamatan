@@ -143,7 +143,7 @@
               <tr>
                 <td class="w-40p"></td>
                 <td class="w-20p"></td>
-                <td class="w-40p"><p class="txt-kop-surat">Klaten, {{date('d F Y', strtotime($surat[0]->tanggal_permohonan))}}</p></td>
+                <td class="w-40p"><p class="txt-kop-surat text-center">Klaten, {{date('d F Y', strtotime($surat[0]->tanggal_permohonan))}}</p></td>
               </tr>
               <tr>
                 <td class="w-40p"></td>

@@ -46,7 +46,11 @@
                       <td>{{$dataPending->tanggal_permohonan}}</td>
                       <td>{{$dataPending->profile->no_nik}}</td>
                       <td>{{$dataPending->kepentingan->jenis_kepentingan}}</td>
-                      <td>{{$dataPending->status}}</td>
+                      <td>{{$dataPending->status}}
+                        @if ($dataPending->keterangan_penolakan && str_contains($dataPending->status, 'Ditolak'))
+                          <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="{{$dataPending->keterangan_penolakan}}"></i>
+                        @endif
+                      </td>
                       {{-- <td>
                         @foreach (json_decode($dataPending->berkas) as $dataBerkas)
                           <img src="{{$dataBerkas}}" alt="" class="w-80">
@@ -99,11 +103,15 @@
                         @endforeach
                       </td> --}}
                       <td class="text-center">
-                        <a href="{{route('suratRtRw', $dataApproved->id)}}">
-                          <button class="btn btn-success"><i class="fa fa-print"></i>
-                            Cetak
-                          </button>
-                        </a>
+                        @if ($dataApproved->tipe_berkas !== 'Kelurahan')
+                          <a href="{{route('suratLurah', $dataApproved->id)}}">
+                            <button class="btn btn-success"><i class="fa fa-print"></i>
+                              Cetak
+                            </button>
+                          </a>
+                        @else
+                          <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Silakan ambil surat di kelurahan"></i>
+                        @endif
                       </td>
                     </tr>
                   @endforeach
@@ -128,6 +136,7 @@
       $('#table-disetujui').DataTable({
         responsive: true
       })
+      $('[data-toggle="tooltip"]').tooltip()
     })
   </script>
 @endsection

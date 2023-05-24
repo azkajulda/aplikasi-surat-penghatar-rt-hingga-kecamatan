@@ -19,6 +19,10 @@
     margin-right: 10px;
 }
 
+.ml-20 {
+    margin-left: 20px !important;
+}
+
 .mr-5 {
     margin-right: 5px;
 }
@@ -33,6 +37,10 @@
 
 .w-80 {
     width: 80px;
+}
+
+.w-100 {
+    width: 100px;
 }
 
 .w-300 {
@@ -61,6 +69,7 @@
 
 
 /* Comonent */
+
 .txt-white {
     color: #fff;
 }
@@ -104,6 +113,15 @@
 .divider-kop-2 { 
     border: 2px solid #000000;
     margin-top: 0px;
+}
+
+.divider-kop-3 { 
+    border: 2px solid #000000;
+    margin: 0px;
+}
+
+.text-capitalize {
+    text-transform: uppercase;
 }
 
 .text-center {
