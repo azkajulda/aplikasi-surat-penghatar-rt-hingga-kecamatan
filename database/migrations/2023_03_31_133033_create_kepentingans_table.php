@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('kepentingans', function (Blueprint $table) {
             $table->id();
             $table->string('jenis_kepentingan');
+            $table->string('tipe_surat');
             $table->string('deskripsi')->nullable();;
             $table->string('keterangan')->nullable();;
             $table->timestamps();

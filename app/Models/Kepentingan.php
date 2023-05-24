@@ -10,7 +10,7 @@ class Kepentingan extends Model
     use HasFactory;
 
     protected $table = 'kepentingans';
-    protected $fillable = ['id', 'jenis_kepentingan', 'deskripsi', 'keterangan'];
+    protected $fillable = ['id', 'jenis_kepentingan', 'tipe_surat','deskripsi', 'keterangan'];
 
     public function surat() {
         return $this->hasMany(Surat::class, 'id_kepentingan', 'id');

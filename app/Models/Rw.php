@@ -22,6 +22,6 @@ class Rw extends Model
     }
 
     public function ketua_rw() {
-        return $this->belongsTo(ListKetuaRw::class, 'id_rw', 'id');
+        return $this->hasOne(ListKetuaRw::class, 'id_rw', 'id');
     }
 }

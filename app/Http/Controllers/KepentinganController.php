@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kepentingan;
+use App\Models\Surat;
 use Illuminate\Http\Request;
 
 class KepentinganController extends Controller
@@ -14,7 +15,11 @@ class KepentinganController extends Controller
      */
     public function index()
     {
-        //
+        $page = 'Kepentingan';
+        $kepentingans = Kepentingan::all();
+        // dd($kepentingans[1]->surat);
+
+        return view('dashboard.kepentingan', compact('page', 'kepentingans'));
     }
 
     /**
@@ -24,7 +29,8 @@ class KepentinganController extends Controller
      */
     public function create()
     {
-        //
+        $page = 'Kepentingan';
+        return view('dashboard.data-kepentingan.addKepentingan', compact('page'));
     }
 
     /**
@@ -35,7 +41,17 @@ class KepentinganController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $kepentingan = new Kepentingan();
+        try {
+            $kepentingan->jenis_kepentingan = $request->jenis_kepentingan;
+            $kepentingan->tipe_surat = $request->tipe_surat;
+            $kepentingan->keterangan = $request->keterangan;
+            $kepentingan->deskripsi = $request->deskripsi;
+            $kepentingan->save();
+        } catch (\Throwable $th) {
+            return redirect()->route('tambahKepentingan')->with('alert','Terjadi kesalahan, silahkan coba lagi!');
+        }
+        return redirect()->route('kepentingan')->with('success','Data Telah Diajukan');
     }
 
     /**
@@ -55,9 +71,12 @@ class KepentinganController extends Controller
      * @param  \App\Models\Kepentingan  $kepentingan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kepentingan $kepentingan)
+    public function edit($id)
     {
-        //
+        $page = 'Kepentingan';
+        $kepentingan = Kepentingan::where('id', $id)->first();
+
+        return view('dashboard.data-kepentingan.editKepentingan', compact('page', 'kepentingan'));
     }
 
     /**
@@ -67,9 +86,19 @@ class KepentinganController extends Controller
      * @param  \App\Models\Kepentingan  $kepentingan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kepentingan $kepentingan)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $kepentingan = Kepentingan::findOrFail($id);
+            $kepentingan->jenis_kepentingan = $request->jenis_kepentingan;
+            $kepentingan->tipe_surat = $request->tipe_surat;
+            $kepentingan->keterangan = $request->keterangan;
+            $kepentingan->deskripsi = $request->deskripsi;
+            $kepentingan->update();
+        } catch (\Throwable $th) {
+            return redirect()->route('editKepentingan')->with('alert','Terjadi kesalahan, silahkan coba lagi!');
+        }
+        return redirect()->route('kepentingan')->with('success','Data Telah Diajukan');
     }
 
     /**
@@ -78,8 +107,15 @@ class KepentinganController extends Controller
      * @param  \App\Models\Kepentingan  $kepentingan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kepentingan $kepentingan)
+    public function destroy($id)
     {
-        //
+        try {
+            $kepentingan = Kepentingan::findOrFail($id);
+            $kepentingan->delete();
+        } catch (\Throwable $th) {
+            return redirect()->route('kepentingan')->with('alert','Terjadi kesalahan, silahkan coba lagi!');
+        }
+        return redirect()->route('kepentingan')->with('success','Data Telah Terhapus');
+        
     }
 }

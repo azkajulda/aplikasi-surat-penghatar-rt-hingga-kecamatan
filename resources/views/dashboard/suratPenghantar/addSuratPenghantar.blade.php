@@ -17,11 +17,13 @@
             </h3>
 
             <div class="box-tools">
-              <a href="{{route('addKeluarga')}}">
-                <button class="btn btn-primary btn-lg" type="submit">
-                  Simpan
-                </button>
-              </a>
+              @if (!$listKeluargas->isEmpty())
+                <a href="{{route('addKeluarga')}}">
+                  <button class="btn btn-primary btn-lg" type="submit">
+                    Simpan
+                  </button>
+                </a>
+              @endif
             </div>
           </div>
 
@@ -79,8 +81,8 @@
                   <div class="form-group col-md-8">
                     <label for="tipe_berkas">Tipe Surat*</label>
                     <div id="tipe_berkas">
-                      <label class="radio-inline"><input type="radio" name="tipe_berkas" value="RT/RW" required>Surat Penghantar RT/RW</label>
-                      <label class="radio-inline"><input type="radio" name="tipe_berkas" value="Kelurahan" required>Surat Keterangan Kelurahan</label>
+                      <label class="radio-inline"><input type="radio" name="tipe_berkas" value="Mandiri" required>Cetak Mandiri</label>
+                      <label class="radio-inline"><input type="radio" name="tipe_berkas" value="Kelurahan" required>Ambil Di Kelurahan</label>
                       <div id="notes-surat"></div>
                     </div>
                   </div>
@@ -130,7 +132,7 @@
         $('#notes-surat').html('');
 
         switch (typeSurat) {
-            case "RT/RW":
+            case "Mandiri":
               $('#notes-surat').append('<p class="help-block txt-red">* Anda dapat mencetak surat secara mandiri</p>');
               break;
               

@@ -13,7 +13,7 @@ class ListKetuaRw extends Model
     protected $fillable = ['id', 'id_rw', 'id_profile'];
 
     public function rw() {
-        return $this->hasOne(Rw::class, 'id_rw', 'id');
+        return $this->belongsTo(Rw::class, 'id_rw', 'id');
     }
 
     

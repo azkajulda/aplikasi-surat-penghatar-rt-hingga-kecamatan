@@ -16,7 +16,7 @@
           <button type="button" class="btn btn-block btn-primary btn-beranda">Buat Surat</button>
         </a>
       @else 
-        <a href="{{route('suratPenghantar')}}">
+        <a href="{{route('dataPengajuan')}}">
           <button type="button" class="btn btn-block btn-primary btn-beranda-admin">Periksa Pengajuan Surat</button>
         </a>
       @endif

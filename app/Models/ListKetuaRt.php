@@ -12,8 +12,8 @@ class ListKetuaRt extends Model
     protected $table = 'list_ketua_rts';
     protected $fillable = ['id', 'id_rt', 'id_profile'];
 
-    public function rw() {
-        return $this->hasOne(Rt::class, 'id_rt', 'id');
+    public function rt() {
+        return $this->belongsTo(Rt::class, 'id_rt', 'id');
     }
 
     

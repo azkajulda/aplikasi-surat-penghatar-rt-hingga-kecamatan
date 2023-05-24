@@ -74,11 +74,11 @@
                   @endif
                 </div>
                 <div class="form-group col-md-8">
-                  <label for="tipe_berkas">Tipe Berkas*</label>
+                  <label for="tipe_berkas">Tipe Surat*</label>
                   <div id="tipe_berkas">
-                    <label class="radio-inline"><input type="radio" name="tipe_berkas" value="Pribadi" {{$surat[0]->tipe_berkas === "Pribadi" ? 'checked' : ''}} required>Pribadi</label>
-                    <label class="radio-inline"><input type="radio" name="tipe_berkas" value="RT/RW" {{$surat[0]->tipe_berkas === "RT/RW" ? 'checked' : ''}} required>RT/RW</label>
-                    <label class="radio-inline"><input type="radio" name="tipe_berkas" value="Kelurahan" {{$surat[0]->tipe_berkas === "Kelurahan" ? 'checked' : ''}} required>Kelurahan</label>
+                    <label class="radio-inline"><input type="radio" name="tipe_berkas" value="Mandiri" {{$surat[0]->tipe_berkas === "Mandiri" ? 'checked' : ''}} required>Cetak Mandiri</label>
+                    <label class="radio-inline"><input type="radio" name="tipe_berkas" value="Kelurahan" {{$surat[0]->tipe_berkas === "Kelurahan" ? 'checked' : ''}} required>Ambil Di Kelurahan</label>
+                    <div id="notes-surat"></div>
                   </div>
                 </div>
               </div>  

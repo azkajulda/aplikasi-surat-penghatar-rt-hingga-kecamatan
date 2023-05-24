@@ -13,7 +13,7 @@ class Rt extends Model
     protected $fillable = ['id', 'id_rw', 'nomor_rt'];
 
     public function rw() {
-        return $this->hasMany(Rw::class, 'id_rw', 'id');
+        return $this->belongsTo(Rw::class, 'id_rw', 'id');
     }
 
     public function list_keluarga() {
@@ -21,6 +21,6 @@ class Rt extends Model
     }
 
     public function ketua_rt() {
-        return $this->belongsTo(ListKetuaRt::class, 'id_rt', 'id');
+        return $this->hasOne(ListKetuaRt::class, 'id_rt', 'id');
     }
 }

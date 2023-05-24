@@ -8,10 +8,11 @@ use App\Models\ListKetuaRt;
 use App\Models\ListKetuaRw;
 use App\Models\Profile;
 use App\Models\Surat;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use PDF;
 
 class SuratController extends Controller
 {
@@ -105,7 +106,7 @@ class SuratController extends Controller
      * @param  \App\Models\Surat  $surat
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showSuratRTRW($id)
     {
         $page = 'Surat';
         $surat = Surat::where('id', $id)->get();
@@ -113,6 +114,15 @@ class SuratController extends Controller
         $rw = ListKetuaRw::where('id_rw', $surat[0]->profile->list_kelaurga->id_rw)->get();
         
         return view('dashboard.suratPenghantar.suratPenghantarRtRw', compact('page', 'surat', 'rt', 'rw'));
+    }
+
+    public function showSuratLurah($id)
+    {
+        $page = 'Surat';
+        $surat = Surat::where('id', $id)->first();
+        $lurah = User::where('role', 'like', 'lurah')->first();
+        
+        return view('dashboard.suratPenghantar.suratKeteranganLurah', compact('page', 'surat', 'lurah'));
     }
 
     /**
@@ -179,5 +189,104 @@ class SuratController extends Controller
             return redirect()->route('suratPenghantar')->with('alert','Terjadi kesalahan, silahkan coba lagi!');
         }
         return redirect()->route('suratPenghantar')->with('success','Surat Telah Dibatalkan');
+    }
+
+    public function showPengajuan() 
+    {
+        $page = 'Surat';
+        $conditionStatus = '';
+        $conditionJabatan = '';
+        $whereCondition = array();
+
+        switch (Auth::user()->role) {
+            case 'rt':
+                $conditionStatus = 'Menunggu ACC RT';
+                $conditionJabatan = Auth::user()->list_keluarga->id_rt;
+                array_push($whereCondition, ['id_rt', '=',  $conditionJabatan], ['status', 'like', $conditionStatus]);
+                break;
+
+            case 'rw':
+                $conditionStatus = 'Menunggu ACC RW';
+                $conditionJabatan = Auth::user()->list_keluarga->id_rw;
+                array_push($whereCondition, ['id_rw', '=',  $conditionJabatan], ['status', 'like', $conditionStatus]);
+                break;
+            
+            default:
+                $conditionStatus = 'Menunggu ACC Lurah';
+                array_push($whereCondition, ['status', 'like', $conditionStatus]);
+                break;
+        }
+        
+        $suratApproved = Surat::where('status', 'like', 'Approved')->get();
+        $suratPengajuan = DB::table('surats')
+        ->join('profiles', 'profiles.id', '=', 'surats.id_profile')
+        ->join('list_keluargas', 'list_keluargas.id', '=', 'profiles.id')
+        ->join('kepentingans', 'kepentingans.id', '=', 'surats.id_kepentingan')
+        ->select('surats.id', 'surats.tanggal_permohonan', 'profiles.no_nik', 'kepentingans.jenis_kepentingan', 'surats.status')
+        ->where($whereCondition)->get();
+        // dd($suratPengajuan, $suratApproved);
+
+        return view('dashboard.dataPengajuan', compact('page', 'suratPengajuan', 'suratApproved'));
+    }
+
+    public function detailSurat($id)
+    {
+        $page = 'Surat';
+        $surat = Surat::where('id', $id)->first();
+
+        return view('dashboard.suratPenghantar.detailSuratPenghantar', compact('page', 'surat'));
+    }
+
+    public function approveSurat($id)
+    {
+        try {
+            $surat = Surat::findOrFail($id);
+            
+            switch (Auth::user()->role) {
+                case 'rt':
+                    $surat->status = 'Menunggu ACC RW';
+                    break;
+
+                case 'rw':
+                    $surat->status = 'Menunggu ACC Lurah';
+                    break;
+                
+                default:
+                    $surat->status = 'Approved';
+                    break;
+            }
+
+            $surat->update();
+            return redirect()->route('dataPengajuan')->with('success','Surat Telah di setujui');
+        } catch (\Throwable $th) {
+            return redirect()->route('detailSurat')->with('alert','Terjadi kesalahan, silahkan coba lagi!');
+        }
+    }
+
+    public function tolakSurat(Request $request, $id)
+    {
+        try {
+            $surat = Surat::findOrFail($id);
+            
+            switch (Auth::user()->role) {
+                case 'rt':
+                    $surat->status = 'Ditolak RT';
+                    break;
+
+                case 'rw':
+                    $surat->status = 'Ditolak RW';
+                    break;
+                
+                default:
+                    $surat->status = 'Ditolak Lurah';
+                    break;
+            }
+
+            $surat->keterangan_penolakan = $request->keterangan_penolakan;
+            $surat->update();
+            return redirect()->route('dataPengajuan')->with('success','Surat Telah di setujui');
+        } catch (\Throwable $th) {
+            return redirect()->route('detailSurat')->with('alert','Terjadi kesalahan, silahkan coba lagi!');
+        }
     }
 }
