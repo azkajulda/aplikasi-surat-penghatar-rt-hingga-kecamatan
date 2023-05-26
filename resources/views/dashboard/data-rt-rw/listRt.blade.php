@@ -2,6 +2,10 @@
 
 @section('page', 'Data RW dan RT')
 
+@section('css-add-on')
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet" />
+@endsection
+
 @section('content')
   <div class="row">
     <div class="col-md-12">
@@ -49,11 +53,9 @@
                   <td>{{$listKetuaRt->ketua_rt->profile?->list_kelaurga->user->no_kk ?? '-'}}</td>
                   <td>Ketua RT {{$listKetuaRt->nomor_rt}}</td>
                   <td class="text-center w-300">
-                    {{-- <a href={{route('editProfile', $listKetuaRt->profile?->id)}}> --}}
-                      <button class="btn btn-warning w-80"><i class="fa fa-pencil"></i>
-                        Edit
-                      </button>
-                    {{-- </a> --}}
+                    <button class="btn btn-warning w-80" data-toggle="modal" data-target="#modal-edit-{{$listKetuaRt->id}}"><i class="fa fa-pencil"></i>
+                      Edit
+                    </button>
                   </td>
                 </tr>  
               @endforeach
@@ -65,28 +67,36 @@
     </div>
   </div>
 
-  <div class="modal modal-danger fade" id="modal-cant-delete">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Gagal!</h4>
+  @foreach ( $listKetuaRT as $listKetuaRt)
+    <div class="modal modal-default fade" id="modal-edit-{{$listKetuaRt->id}}">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">Edit Ketua RT</h4>
+          </div>
+          <div class="modal-body">
+            <select class="form-control selectpicker" id="select-country" data-live-search="true">
+              <option data-tokens="china">China</option>
+              <option data-tokens="malayasia">Malayasia</option>
+              <option data-tokens="singapore">Singapore</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+          </div>
         </div>
-        <div class="modal-body">
-          <p>Tidak bisa menghapus anggota keluarga jika sedang mengajukan surat penghantar </p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-        </div>
+        <!-- /.modal-content -->
       </div>
-      <!-- /.modal-content -->
+      <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal-dialog -->
-  </div>
+  @endforeach
 @endsection
 
 @section('js-add-on')
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
   <script>
     $(function () {
       $('#table-keluarga').DataTable({

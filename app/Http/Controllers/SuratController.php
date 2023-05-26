@@ -101,31 +101,6 @@ class SuratController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Surat  $surat
-     * @return \Illuminate\Http\Response
-     */
-    public function showSuratRTRW($id)
-    {
-        $page = 'Surat';
-        $surat = Surat::where('id', $id)->get();
-        $rt = ListKetuaRt::where('id_rt', $surat[0]->profile->list_kelaurga->id_rt)->get();
-        $rw = ListKetuaRw::where('id_rw', $surat[0]->profile->list_kelaurga->id_rw)->get();
-        
-        return view('dashboard.suratPenghantar.suratPenghantarRtRw', compact('page', 'surat', 'rt', 'rw'));
-    }
-
-    public function showSuratLurah($id)
-    {
-        $page = 'Surat';
-        $surat = Surat::where('id', $id)->first();
-        $lurah = User::where('role', 'like', 'lurah')->first();
-        
-        return view('dashboard.suratPenghantar.suratKeteranganLurah', compact('page', 'surat', 'lurah'));
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Surat  $surat
@@ -289,4 +264,30 @@ class SuratController extends Controller
             return redirect()->route('detailSurat')->with('alert','Terjadi kesalahan, silahkan coba lagi!');
         }
     }
+
+     /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Surat  $surat
+     * @return \Illuminate\Http\Response
+     */
+    public function showSuratRTRW($id)
+    {
+        $page = 'Surat';
+        $surat = Surat::where('id', $id)->get();
+        $rt = ListKetuaRt::where('id_rt', $surat[0]->profile->list_kelaurga->id_rt)->get();
+        $rw = ListKetuaRw::where('id_rw', $surat[0]->profile->list_kelaurga->id_rw)->get();
+        
+        return view('dashboard.suratPenghantar.suratPenghantarRtRw', compact('page', 'surat', 'rt', 'rw'));
+    }
+
+    public function showSuratLurah($id)
+    {
+        $page = 'Surat';
+        $surat = Surat::where('id', $id)->first();
+        $lurah = User::where('role', 'like', 'lurah')->first();
+        
+        return view('dashboard.suratPenghantar.suratKeteranganLurah', compact('page', 'surat', 'lurah'));
+    }
+
 }
