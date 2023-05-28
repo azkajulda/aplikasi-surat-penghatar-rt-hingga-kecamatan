@@ -75,7 +75,7 @@
               </tr>
               <tr>
                 <td  colspan="2">
-                  <p class="txt-judul-surat mt-20">SURAT PENGHANTAR</p>
+                  <p class="txt-judul-surat mt-20">SURAT PENGANTAR</p>
                   <p class="txt-kop-surat text-center m-0">Nomor: {{$surat[0]->id}}/{{$surat[0]->profile->list_kelaurga->rt->nomor_rt}}/{{$surat[0]->profile->list_kelaurga->rw->nomor_rw}}/{{date("Y")}}</p>
                 </td>
               </tr>

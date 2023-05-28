@@ -15,12 +15,6 @@
                 <i class="fa fa-arrow-circle-left"></i> <span>Kembali</span>
               </a>
             </h3>
-
-            <div class="box-tools">
-              <button class="btn btn-primary btn-lg" type="submit">
-                Simpan
-              </button>
-            </div>
           </div>
 
           <div class="box-body">
@@ -41,7 +35,7 @@
                 <div class="form-group col-md-8">
                   <label for="tipe_surat">Tipe Surat*</label>
                   <div id="tipe_surat">
-                    <label class="radio-inline"><input type="radio" name="tipe_surat" value="Penghantar" required {{$kepentingan->tipe_surat === 'Penghantar' ? 'checked': ''}}>Penghantar</label>
+                    <label class="radio-inline"><input type="radio" name="tipe_surat" value="Penghantar" required {{$kepentingan->tipe_surat === 'Penghantar' ? 'checked': ''}}>Pengantar</label>
                     <label class="radio-inline"><input type="radio" name="tipe_surat" value="Keterangan" required {{$kepentingan->tipe_surat === 'Keterangan' ? 'checked': ''}}>Keterangan</label>
                   </div>
                 </div>
@@ -61,6 +55,12 @@
                 </div>
               </div>  
             </div>
+          </div>
+
+          <div class="box-footer">
+            <button class="btn btn-primary btn-lg" type="submit">
+              Simpan
+            </button>
           </div>
         </form>
       </div>

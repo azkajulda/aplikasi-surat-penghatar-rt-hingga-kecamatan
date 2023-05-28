@@ -49,11 +49,9 @@
                         Detail RT
                       </button>
                     </a>
-                    <a href={{route('editRw', $listKetuaRw->id_rw)}}>
-                      <button class="btn btn-warning w-100"><i class="fa fa-pencil"></i>
-                        Edit
-                      </button>
-                    </a>
+                    <button class="btn btn-warning w-100" data-toggle="modal" data-target="#modal-edit-{{$listKetuaRw->id}}"><i class="fa fa-pencil"></i>
+                      Edit
+                    </button>
                   </td>
                 </tr>  
               @endforeach
@@ -65,25 +63,38 @@
     </div>
   </div>
 
-  <div class="modal modal-danger fade" id="modal-cant-delete">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Gagal!</h4>
+  @foreach ( $listKetuaRW as $listKetuaRw)
+    <div class="modal modal-default fade" id="modal-edit-{{$listKetuaRw->id}}">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">Edit Ketua RW {{$listKetuaRw->nomor_rw}}</h4>
+          </div>
+          <form action="{{route('editRw', $listKetuaRw->id ?? 0)}}" method="POST">
+            @csrf
+            <div class="modal-body">
+              <input type="text" name="jabatan" value="rw" style="display: none">
+              <input type="text" name="id_old_rt" value="{{$listKetuaRw->profile->list_kelaurga->user->id ?? ''}}" style="display: none">
+                <select class="form-control selectpicker" id="select-ketua-rw" data-live-search="true" name="id_profile">
+                <option data-tokens="" value="">&mdash;Pilih Ketua RW&mdash;</option>
+                @foreach ($listProfiles as $listProfile)
+                  <option data-tokens="{{$listProfile->nama}}" value="{{$listProfile->id}}-{{$listProfile->id_user}}">{{$listProfile->nama}}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
         </div>
-        <div class="modal-body">
-          <p>Tidak bisa menghapus anggota keluarga jika sedang mengajukan surat penghantar </p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-        </div>
+        <!-- /.modal-content -->
       </div>
-      <!-- /.modal-content -->
+      <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal-dialog -->
-  </div>
+  @endforeach
 @endsection
 
 @section('js-add-on')

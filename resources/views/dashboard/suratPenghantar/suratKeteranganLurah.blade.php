@@ -16,7 +16,7 @@
     </style> 
 @endsection
 
-@section('page', 'Surat Penghantar RT/RW')
+@section('page', 'Surat Pengantar RT/RW')
 
 @section('content')
   <div class="row">
@@ -85,7 +85,7 @@
               </tr>
               <tr>
                 <td></td>
-                <td colspan="3"><p class="txt-kop-surat my-20"><b>Memberikan Rekomendasi Kepada:</b></p></td>
+                <td colspan="3"><p class="txt-kop-surat my-20"><b>Memberikan persetujuan pada surat ini kepada :</b></p></td>
               </tr>
               <tr>
                 <td></td>

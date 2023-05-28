@@ -125,7 +125,7 @@
                     <br>
                   @endforeach
                   @if (Auth::user()->role === 'lurah')
-                    <a href="{{route('suratRtRw', $surat->id)}}" target="_blank">{{count(json_decode($surat->berkas)) + 1}}. Surat Penghantar RT dan RW</a>
+                    <a href="{{route('suratRtRw', $surat->id)}}" target="_blank">{{count(json_decode($surat->berkas)) + 1}}. Surat Pengantar RT dan RW</a>
                   @endif
                 </div>
               </div>

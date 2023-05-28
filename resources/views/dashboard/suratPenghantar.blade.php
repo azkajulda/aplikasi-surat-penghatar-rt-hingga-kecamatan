@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('page', 'Surat Penghantar')
+@section('page', 'Surat Pengantar')
 
 @section('content')
   <div class="row">

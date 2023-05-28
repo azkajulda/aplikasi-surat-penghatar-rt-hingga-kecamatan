@@ -24,12 +24,6 @@
                 <i class="fa fa-arrow-circle-left"></i> <span>Kembali</span>
               </a>
             </h3>
-
-            <div class="box-tools">
-              <button class="btn btn-primary btn-lg" type="submit">
-                Simpan
-              </button>
-            </div>
           </div>
           <div class="box-body">
             {{-- Account --}}
@@ -208,6 +202,11 @@
               </div>
             </div>
 
+          </div>
+          <div class="box-footer">
+            <button class="btn btn-primary btn-lg" type="submit">
+              Simpan
+            </button>
           </div>
         </form>
       </div>

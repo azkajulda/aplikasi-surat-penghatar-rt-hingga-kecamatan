@@ -89,9 +89,12 @@ Route::middleware(['auth'])->group(function (){
         Route::post('/add', [ListKetuaRtController::class, 'store'])->name('addRtRw');
         Route::get('/list-rw', [ListKetuaRwController::class, 'index'])->name('listRw');
         Route::get('/list-rt/{id}', [ListKetuaRtController::class, 'show'])->name('listRt');
-        Route::get('/edit-rt-rw/{id}', [ListKetuaRwController::class, 'edit'])->name('editRw');
+        Route::post('/edit-rt-rw/{id}', [ListKetuaRtController::class, 'update'])->name('editRw');
 
-
+        Route::get('/warga', [ListKetuaRtController::class, 'registrasiWarga'])->name('registrasiWarga');    
+        Route::post('/add-warga', [ListKetuaRtController::class, 'create'])->name('addWarga');
+        Route::get('/list-warga', [ListKetuaRtController::class, 'showListWarga'])->name('listWarga');    
+        Route::get('/delete-warga/{id}', [ListKetuaRtController::class, 'destroy'])->name('deleteWarga');    
     });
 
     Route::get('/change-password', [ProfileController::class, 'show'])->name('changePassword');

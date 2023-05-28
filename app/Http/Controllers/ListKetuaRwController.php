@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ListKetuaRw;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ListKetuaRwController extends Controller
 {
@@ -16,8 +17,14 @@ class ListKetuaRwController extends Controller
     {
         $page = 'RT/RW';
         $listKetuaRW = ListKetuaRw::orderBy('id_rw', 'asc')->get();
+        $listProfiles = DB::table('profiles')
+        ->select('profiles.id', 'profiles.nama', 'users.id as id_user')
+        ->leftJoin('list_keluargas', 'list_keluargas.id_profile', '=', 'profiles.id')
+        ->leftJoin('users', 'users.id', '=', 'list_keluargas.id_user')
+        ->where('users.role', 'warga')
+        ->get();
 
-        return view('dashboard.data-rt-rw.listRw', compact('page', 'listKetuaRW'));
+        return view('dashboard.data-rt-rw.listRw', compact('page', 'listKetuaRW', 'listProfiles'));
     }
 
     /**

@@ -75,18 +75,25 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-            <h4 class="modal-title">Edit Ketua RT</h4>
+            <h4 class="modal-title">Edit Ketua RT {{$listKetuaRt->nomor_rt}}</h4>
           </div>
-          <div class="modal-body">
-            <select class="form-control selectpicker" id="select-country" data-live-search="true">
-              <option data-tokens="china">China</option>
-              <option data-tokens="malayasia">Malayasia</option>
-              <option data-tokens="singapore">Singapore</option>
-            </select>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-          </div>
+          <form action="{{route('editRw', $listKetuaRt->ketua_rt?->id ?? 0)}}" method="POST">
+            @csrf
+            <div class="modal-body">
+              <input type="text" name="jabatan" value="rt" style="display: none">
+              <input type="text" name="id_rt" value="{{$listKetuaRt->id}}" style="display: none">
+              <input type="text" name="id_old_rt" value="{{$listKetuaRt->ketua_rt->profile->list_kelaurga->user->id ?? ''}}" style="display: none">
+                <select class="form-control selectpicker" id="select-ketua-rt" data-live-search="true" name="id_profile">
+                <option data-tokens="" value="">&mdash;Pilih Ketua RT&mdash;</option>
+                @foreach ($listProfiles as $listProfile)
+                  <option data-tokens="{{$listProfile->nama}}" value="{{$listProfile->id}}-{{$listProfile->id_user}}">{{$listProfile->nama}}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
         </div>
         <!-- /.modal-content -->
       </div>
@@ -100,9 +107,6 @@
   <script>
     $(function () {
       $('#table-keluarga').DataTable({
-        responsive: true
-      })
-      $('#table-disetujui').DataTable({
         responsive: true
       })
     })

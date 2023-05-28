@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('page', 'Buat Surat Penghantar')
+@section('page', 'Buat Surat Pengantar')
 
 @section('content')
   <div class="row">
@@ -15,16 +15,6 @@
                 <i class="fa fa-arrow-circle-left"></i> <span>Kembali</span>
               </a>
             </h3>
-
-            <div class="box-tools">
-              @if (!$listKeluargas->isEmpty())
-                <a href="{{route('addKeluarga')}}">
-                  <button class="btn btn-primary btn-lg" type="submit">
-                    Simpan
-                  </button>
-                </a>
-              @endif
-            </div>
           </div>
 
           <div class="box-body">
@@ -91,14 +81,23 @@
                 <div class="text-center">
                   <h3>Data Keluarga Anda Kosong</h3>
                   <h5>Silahkan Isi Data Anda Disini</h5>
-                  <a href={{route('addKeluarga')}}>
-                    <button class="btn btn-primary my-20"><i class="fa fa-book mr-10"></i>
-                      Tambah Data Kepala Keluarga
-                    </button>
+                  <a href={{route('addKeluarga')}} class="btn btn-primary my-20">
+                    <i class="fa fa-book mr-10"></i>
+                    Tambah Data Kepala Keluarga
                   </a>
                 </div>
               @endif
             </div>
+          </div>
+
+          <div class="box-footer">
+            @if (!$listKeluargas->isEmpty())
+              <a href="{{route('addKeluarga')}}">
+                <button class="btn btn-primary btn-lg" type="submit">
+                  Simpan
+                </button>
+              </a>
+            @endif
           </div>
         </form>
       </div>

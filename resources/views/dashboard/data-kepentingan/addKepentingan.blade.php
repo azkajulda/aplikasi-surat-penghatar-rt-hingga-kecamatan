@@ -15,14 +15,6 @@
                 <i class="fa fa-arrow-circle-left"></i> <span>Kembali</span>
               </a>
             </h3>
-
-            <div class="box-tools">
-              <a href="{{route('addKepentingan')}}">
-                <button class="btn btn-primary btn-lg" type="submit">
-                  Simpan
-                </button>
-              </a>
-            </div>
           </div>
 
           <div class="box-body">
@@ -43,7 +35,7 @@
                 <div class="form-group col-md-8">
                   <label for="tipe_surat">Tipe Surat*</label>
                   <div id="tipe_surat">
-                    <label class="radio-inline"><input type="radio" name="tipe_surat" value="Penghantar" required>Penghantar</label>
+                    <label class="radio-inline"><input type="radio" name="tipe_surat" value="Penghantar" required>Pengantar</label>
                     <label class="radio-inline"><input type="radio" name="tipe_surat" value="Keterangan" required>Keterangan</label>
                   </div>
                 </div>
@@ -62,6 +54,11 @@
                   <textarea class="form-control" name="deskripsi" rows="4" placeholder="Deskripsi"></textarea>
                 </div>
               </div>  
+            </div>
+            <div class="box-footer">
+              <button class="btn btn-primary btn-lg" type="submit">
+                Simpan
+              </button>
             </div>
           </div>
         </form>

@@ -86,7 +86,7 @@
           <h4 class="modal-title">Gagal!</h4>
         </div>
         <div class="modal-body">
-          <p>Tidak bisa menghapus kepentingan surat ini jika sedang ada yang mengajukan surat penghantar dengan kepentingan tersebut</p>
+          <p>Tidak bisa menghapus kepentingan surat ini jika sedang ada yang mengajukan surat pengantar dengan kepentingan tersebut</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
