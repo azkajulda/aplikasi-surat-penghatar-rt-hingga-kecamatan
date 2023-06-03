@@ -16,9 +16,9 @@ class KeperluanSeeder extends Seeder
     public function run()
     {
         Kepentingan::insert([
-            ['jenis_kepentingan' => 'Surat Keterangan Miskin', 'tipe_surat' => 'Keterangan'],
-            ['jenis_kepentingan' => 'Surat Keterangan Domisili', 'tipe_surat' => 'Penghantar'],
-            ['jenis_kepentingan' => 'Surat Keterangan Belum Menikah', 'tipe_surat' => 'Penghantar'],
+            ['jenis_kepentingan' => 'Surat Keterangan Miskin', 'tipe_surat' => 'Keterangan', 'keterangan' => 'KTP dan Kartu Keluarga'],
+            ['jenis_kepentingan' => 'Surat Keterangan Domisili', 'tipe_surat' => 'Penghantar', 'keterangan' => 'KTP dan Kartu Keluarga'],
+            ['jenis_kepentingan' => 'Surat Keterangan Belum Menikah', 'tipe_surat' => 'Penghantar', 'keterangan' => 'KTP, Kartu Keluarga, dan Akta Cerai / Surat Kematian untuk keterangan Janda/Duda'],
 
         ]);
     }

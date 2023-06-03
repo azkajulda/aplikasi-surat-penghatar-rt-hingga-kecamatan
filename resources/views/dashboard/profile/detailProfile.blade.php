@@ -45,7 +45,7 @@
                   <h5>Silahkan Isi Data Anda Disini</h5>
                   <a href={{route('addKeluarga')}}>
                     <button class="btn btn-primary my-20"><i class="fa fa-book mr-10"></i>
-                      Tambah Data Kepala Keluarga
+                      {{Auth::user()->role === 'warga' ? 'Tambah Data Kepala Keluarga' : 'Lengkapi Profile Anda'}}
                     </button>
                   </a>
                 </div>

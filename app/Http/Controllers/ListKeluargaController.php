@@ -35,6 +35,7 @@ class ListKeluargaController extends Controller
     {
         $page = 'Keluarga';
         $rw = Rw::all();
+
         return view('dashboard.data-keluarga.addDataKeluarga', compact('page', 'rw'));
     }
 
@@ -84,13 +85,17 @@ class ListKeluargaController extends Controller
             $profile->golongan_darah = $request->golongan_darah;
             $profile->save();
             
+            $idRt = Auth::user()->role === 'warga' ? Auth::user()->list_keluarga->id_rt  : $request->id_rt;
+            $idRw = Auth::user()->role === 'warga' ? Auth::user()->list_keluarga->id_rw  : $request->id_rw;
+
             $listKeluarga->id_user = Auth::user()->id;
-            $listKeluarga->id_rt = $request->id_rt;
-            $listKeluarga->id_rw = $request->id_rw;
+            $listKeluarga->id_rt = $idRt;
+            $listKeluarga->id_rw = $idRw;
             $listKeluarga->id_profile = $profile->id;
             $listKeluarga->save();
 
         } catch (\Throwable $th) {
+            dd($th);
             if (Auth::user()->role !== 'warga'){
                 return redirect()->route('profile', Auth::user()->list_keluarga->profile?->id ?? 0)->with('alert','Terjadi kesalahan, silahkan coba lagi!.');
             } else {

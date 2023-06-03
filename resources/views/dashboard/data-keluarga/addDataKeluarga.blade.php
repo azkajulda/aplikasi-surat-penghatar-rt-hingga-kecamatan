@@ -106,18 +106,26 @@
 
                 <div class="form-group col-md-3">
                   <label>RW*</label>
-                  <select class="form-control" name="id_rw" id="rw-state" required>
-                    <option value="">&mdash;Pilih RW Anda&mdash;</option>
-                    @foreach ( $rw as $rws)
-                      <option value="{{$rws->id}}">{{$rws->nomor_rw}}</option>
-                    @endforeach
+                  <select class="form-control" name="id_rw" id="rw-state" required {{Auth::user()->role === 'warga' ? 'disabled' : ''}}>
+                    @if (Auth::user()->role === 'warga')
+                      <option value="{{Auth::user()->list_keluarga->id_rw}}">{{Auth::user()->list_keluarga->rw->nomor_rw}}</option>
+                    @else
+                      <option value="">&mdash;Pilih RW Anda&mdash;</option>
+                      @foreach ( $rw as $rws)
+                        <option value="{{$rws->id}}">{{$rws->nomor_rw}}</option>
+                      @endforeach
+                    @endif
                   </select>
                 </div>
 
                 <div class="form-group col-md-3">
                   <label>RT*</label>
-                  <select class="form-control" name="id_rt" id="rt-state" required>
-                    <option value="">&mdash;Pilih RT Anda&mdash;</option>
+                  <select class="form-control" name="id_rt" id="rt-state" required {{Auth::user()->role === 'warga' ? 'disabled' : ''}}>
+                    @if (Auth::user()->role === 'warga')
+                      <option value="{{Auth::user()->list_keluarga->id_rt ?? ''}}">{{Auth::user()->list_keluarga->rt->nomor_rt ?? ''}}</option>
+                    @else
+                      <option value="">&mdash;Pilih RT Anda&mdash;</option>
+                    @endif
                   </select>
                 </div>
 
