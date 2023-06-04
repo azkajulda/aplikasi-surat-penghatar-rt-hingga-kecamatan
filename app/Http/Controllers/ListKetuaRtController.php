@@ -216,6 +216,7 @@ class ListKetuaRtController extends Controller
             }
 
         } catch (\Throwable $th) {
+            dd($th);
             return redirect()->route('registrasiRTRW')->with('alert','Terjadi kesalahan, silahkan coba lagi!.');
         }
         return redirect()->route('listRw')->with('success','Data Telah Masuk');

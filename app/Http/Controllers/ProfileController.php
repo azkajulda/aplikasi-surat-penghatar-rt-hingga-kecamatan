@@ -148,8 +148,6 @@ class ProfileController extends Controller
             $profile->update();
             
             $listKeluarga->id_user = Auth::user()->id;
-            $listKeluarga->id_rt = $request->id_rt;
-            $listKeluarga->id_rw = $request->id_rw;
             $listKeluarga->id_profile = $profile->id;
             $listKeluarga->update();
 

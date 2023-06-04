@@ -106,7 +106,7 @@
 
                 <div class="form-group col-md-3">
                   <label>RW*</label>
-                  <select class="form-control" name="id_rw" id="rw-state" required>
+                  <select class="form-control" name="id_rw" id="rw-state" required disabled>
                     <option value="">&mdash;Pilih RW Anda&mdash;</option>
                     @foreach ( $rw as $rws)
                       <option value="{{$rws->id}}" {{$profile[0]->list_kelaurga->id_rw === $rws->id ? 'selected' : ''}}>{{$rws->nomor_rw}}</option>
@@ -116,7 +116,7 @@
 
                 <div class="form-group col-md-3">
                   <label>RT*</label>
-                  <select class="form-control" name="id_rt" id="rt-state" value="{{$profile[0]->list_kelaurga->rt->id}}" required>
+                  <select class="form-control" name="id_rt" id="rt-state" value="{{$profile[0]->list_kelaurga->rt->id}}" required disabled>
                     <option value="">&mdash;Pilih RT Anda&mdash;</option>
                     @foreach ( $rt as $rts)
                       <option value="{{$rts->id}}" {{$profile[0]->list_kelaurga->id_rt === $rts->id ? 'selected' : ''}}>{{$rts->nomor_rt}}</option>

@@ -166,14 +166,14 @@
                 <td class="w-40p"><p class="txt-kop-surat text-center mt-20">Pengurus RT,</p></td>
               </tr>
               <tr>
-                <td class="w-40p text-center"><img src="{{$rt[0]->profile->ttd}}" alt="ttd" width="120"></td>
-                <td class="w-20p"></td>
                 <td class="w-40p text-center"><img src="{{$rw[0]->profile->ttd}}" alt="ttd" width="120"></td>
+                <td class="w-20p"></td>
+                <td class="w-40p text-center"><img src="{{$rt[0]->profile->ttd}}" alt="ttd" width="120"></td>
               </tr>
               <tr>
-                <td class="w-40p"><p class="txt-kop-surat text-center">({{$rt[0]->profile->nama}})</p></td>
-                <td class="w-20p"></td>
                 <td class="w-40p"><p class="txt-kop-surat text-center">({{$rw[0]->profile->nama}})</p></td>
+                <td class="w-20p"></td>
+                <td class="w-40p"><p class="txt-kop-surat text-center">({{$rt[0]->profile->nama}})</p></td>
               </tr>
             </table>
           </div>
