@@ -98,7 +98,7 @@ class KepentinganController extends Controller
         } catch (\Throwable $th) {
             return redirect()->route('editKepentingan')->with('alert','Terjadi kesalahan, silahkan coba lagi!');
         }
-        return redirect()->route('kepentingan')->with('success','Data Telah Diajukan');
+        return redirect()->route('kepentingan')->with('success','Data Telah Di Perbarui');
     }
 
     /**
