@@ -44,7 +44,7 @@
               <div class="box-header with-border">
                 <i class="fa fa-user"></i>
 
-                <h3 class="box-title">Registrasi Akun RT/RW</h3>
+                <h3 class="box-title">Registrasi Akun Warga</h3>
               </div>
               <div class="box-body">
                 <div class="row">
@@ -83,7 +83,7 @@
               <div class="box-header with-border">
                 <i class="fa fa-user"></i>
 
-                <h3 class="box-title">Profile RT/RW</h3>
+                <h3 class="box-title">Profile Warga</h3>
               </div>
               <div class="box-body">
                 <div class="row">
