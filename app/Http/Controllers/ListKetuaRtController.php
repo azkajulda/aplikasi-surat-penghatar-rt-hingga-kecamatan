@@ -45,7 +45,24 @@ class ListKetuaRtController extends Controller
     public function showListWarga()
     {
         $page = 'List Warga';
-        $wargas = ListKeluarga::where('id_rt', Auth::user()->list_keluarga->id_rt)->get();
+        $wargasRaw = '';
+        if (Auth::user()->role === 'rt') {
+            $wargasRaw = collect(DB::table('users')
+            ->leftJoin('list_keluargas', 'list_keluargas.id_user', '=', 'users.id')
+            ->leftJoin('profiles', 'profiles.id', '=', 'list_keluargas.id_profile')
+            ->select('users.id AS user_id' ,'list_keluargas.id', 'profiles.nama', 'profiles.no_nik', 'users.no_kk')
+            ->where('list_keluargas.id_rt', Auth::user()->list_keluarga->id_rt)
+            ->get());
+        } else {
+            $wargasRaw = DB::table('users')
+            ->leftJoin('list_keluargas', 'list_keluargas.id_user', '=', 'users.id')
+            ->leftJoin('profiles', 'profiles.id', '=', 'list_keluargas.id_profile')
+            ->select('users.id AS user_id' ,'list_keluargas.id', 'profiles.nama', 'profiles.no_nik', 'users.no_kk')
+            ->where('list_keluargas.id_rw', Auth::user()->list_keluarga->id_rw)
+            ->get();
+        }
+        $wargas = $wargasRaw->unique('no_kk');
+        $wargas->values()->all();
         
         return view('dashboard.data-warga.listWarga', compact('page', 'wargas'));
     }
@@ -327,5 +344,13 @@ class ListKetuaRtController extends Controller
         return redirect()->route('listWarga')->with('success','Data Telah Terhapus');
         
 
+    }
+
+    public function detailWarga($id) {
+        $page = 'List Warga';
+        $isBack = true;
+        $listKeluargas = ListKeluarga::where('id_user', $id)->get();
+
+        return view('dashboard.dataKeluarga', compact('page', 'listKeluargas', 'isBack'));
     }
 }

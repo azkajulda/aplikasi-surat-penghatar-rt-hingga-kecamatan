@@ -88,6 +88,7 @@ class ListKeluargaController extends Controller
             $idRt = Auth::user()->role === 'warga' ? Auth::user()->list_keluarga->id_rt  : $request->id_rt;
             $idRw = Auth::user()->role === 'warga' ? Auth::user()->list_keluarga->id_rw  : $request->id_rw;
 
+            $listKeluarga->status_keluarga = $request->status_keluarga;
             $listKeluarga->id_user = Auth::user()->id;
             $listKeluarga->id_rt = $idRt;
             $listKeluarga->id_rw = $idRw;

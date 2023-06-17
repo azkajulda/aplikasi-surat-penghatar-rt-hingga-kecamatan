@@ -171,18 +171,21 @@ class SuratController extends Controller
         $page = 'Surat';
         $conditionStatus = '';
         $conditionJabatan = '';
+        $whereConditionRiwayat = array();
         $whereCondition = array();
 
         switch (Auth::user()->role) {
             case 'rt':
                 $conditionStatus = 'Menunggu ACC RT';
                 $conditionJabatan = Auth::user()->list_keluarga->id_rt;
+                array_push($whereConditionRiwayat, ['id_rt', '=',  $conditionJabatan]);
                 array_push($whereCondition, ['id_rt', '=',  $conditionJabatan], ['status', 'like', $conditionStatus]);
                 break;
 
             case 'rw':
                 $conditionStatus = 'Menunggu ACC RW';
                 $conditionJabatan = Auth::user()->list_keluarga->id_rw;
+                array_push($whereConditionRiwayat, ['id_rw', '=',  $conditionJabatan]);
                 array_push($whereCondition, ['id_rw', '=',  $conditionJabatan], ['status', 'like', $conditionStatus]);
                 break;
             
@@ -199,9 +202,15 @@ class SuratController extends Controller
         ->join('kepentingans', 'kepentingans.id', '=', 'surats.id_kepentingan')
         ->select('surats.id', 'surats.tanggal_permohonan', 'profiles.no_nik', 'kepentingans.jenis_kepentingan', 'surats.status')
         ->where($whereCondition)->get();
+        $suratRiwayat = DB::table('surats')
+        ->join('profiles', 'profiles.id', '=', 'surats.id_profile')
+        ->join('list_keluargas', 'list_keluargas.id', '=', 'profiles.id')
+        ->join('kepentingans', 'kepentingans.id', '=', 'surats.id_kepentingan')
+        ->select('surats.id', 'surats.tanggal_permohonan', 'profiles.no_nik', 'kepentingans.jenis_kepentingan', 'surats.status')
+        ->where($whereConditionRiwayat)->get();
         // dd($suratPengajuan, $suratApproved);
 
-        return view('dashboard.dataPengajuan', compact('page', 'suratPengajuan', 'suratApproved'));
+        return view('dashboard.dataPengajuan', compact('page', 'suratPengajuan', 'suratApproved', 'suratRiwayat'));
     }
 
     public function detailSurat($id)
@@ -259,7 +268,7 @@ class SuratController extends Controller
 
             $surat->keterangan_penolakan = $request->keterangan_penolakan;
             $surat->update();
-            return redirect()->route('dataPengajuan')->with('success','Surat Telah di setujui');
+            return redirect()->route('dataPengajuan')->with('success','Surat Telah di tolak');
         } catch (\Throwable $th) {
             return redirect()->route('detailSurat')->with('alert','Terjadi kesalahan, silahkan coba lagi!');
         }

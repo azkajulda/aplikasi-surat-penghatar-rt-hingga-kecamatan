@@ -43,7 +43,12 @@
                   <label>Syarat Berkas*</label>
                   <select class="form-control" name="keterangan" required>
                     <option value="">&mdash;Pilih Syarat Berkas&mdash;</option>
+                    <option value="KTP" {{$kepentingan->keterangan === 'KTP' ? 'selected' : ''}}>KTP</option>
+                    <option value="Kartu Keluarga" {{$kepentingan->keterangan === 'Kartu Keluarga' ? 'selected' : ''}}>Kartu Keluarga</option>
                     <option value="KTP dan Kartu Keluarga" {{$kepentingan->keterangan === 'KTP dan Kartu Keluarga' ? 'selected' : ''}}>KTP dan Kartu Keluarga</option>
+                    <option value="KTP, Kartu Keluarga, Dan Ijazah Terakhir" {{$kepentingan->keterangan === 'KTP, Kartu Keluarga, Dan Ijazah Terakhir' ? 'selected' : ''}}>KTP, Kartu Keluarga, Dan Ijazah Terakhir</option>
+                    <option value="KTP, Kartu Keluarga, Izajah terakhir, dan Akta Kelahiran" {{$kepentingan->keterangan === 'KTP, Kartu Keluarga, Izajah terakhir, dan Akta Kelahiran' ? 'selected' : ''}}>KTP, Kartu Keluarga, Izajah terakhir, dan Akta Kelahiran</option>
+                    <option value="KTP, Kartu Keluarga, dan Surat Pernyataan Kepemilikan Usaha" {{$kepentingan->keterangan === 'KTP, Kartu Keluarga, dan Surat Pernyataan Kepemilikan Usaha' ? 'selected' : ''}}>KTP, Kartu Keluarga, dan Surat Pernyataan Kepemilikan Usaha</option>
                     <option value="KTP, Kartu Keluarga, dan Akta Cerai / Surat Kematian untuk keterangan Janda/Duda" {{$kepentingan->keterangan === 'KTP, Kartu Keluarga, dan Akta Cerai / Surat Kematian untuk keterangan Janda/Duda' ? 'selected' : ''}}>KTP, Kartu Keluarga, dan Akta Cerai / Surat Kematian untuk keterangan Janda/Duda</option>
                     <option value="KTP, Kartu Keluarga, dan Akta Kematian" {{$kepentingan->keterangan === 'KTP, Kartu Keluarga, dan Akta Kematian' ? 'selected' : ''}}>KTP, Kartu Keluarga, dan Akta Kematian</option>
                     <option value="KTP, Kartu Keluarga, dan Akta Kelahiran" {{$kepentingan->keterangan === 'KTP, Kartu Keluarga, dan Akta Kelahiran' ? 'selected' : ''}}>KTP, Kartu Keluarga, dan Akta Kelahiran</option>

@@ -43,7 +43,12 @@
                   <label>Syarat Berkas*</label>
                   <select class="form-control" name="keterangan" required>
                     <option value="">&mdash;Pilih Syarat Berkas&mdash;</option>
+                    <option value="KTP">KTP</option>
+                    <option value="Kartu Keluarga">Kartu Keluarga</option>
                     <option value="KTP dan Kartu Keluarga">KTP dan Kartu Keluarga</option>
+                    <option value="KTP, Kartu Keluarga, Dan Ijazah Terakhir">KTP, Kartu Keluarga, Dan Ijazah Terakhir</option>
+                    <option value="KTP, Kartu Keluarga, Izajah terakhir, dan Akta Kelahiran">KTP, Kartu Keluarga, Izajah terakhir, dan Akta Kelahiran</option>
+                    <option value="KTP, Kartu Keluarga, dan Surat Pernyataan Kepemilikan Usaha">KTP, Kartu Keluarga, dan Surat Pernyataan Kepemilikan Usaha</option>
                     <option value="KTP, Kartu Keluarga, dan Akta Cerai / Surat Kematian untuk keterangan Janda/Duda">KTP, Kartu Keluarga, dan Akta Cerai / Surat Kematian untuk keterangan Janda/Duda</option>
                     <option value="KTP, Kartu Keluarga, dan Akta Kematian">KTP, Kartu Keluarga, dan Akta Kematian</option>
                     <option value="KTP, Kartu Keluarga, dan Akta Kelahiran">KTP, Kartu Keluarga, dan Akta Kelahiran</option>

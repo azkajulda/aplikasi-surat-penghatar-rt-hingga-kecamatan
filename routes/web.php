@@ -95,6 +95,8 @@ Route::middleware(['auth'])->group(function (){
         Route::post('/add-warga', [ListKetuaRtController::class, 'create'])->name('addWarga');
         Route::get('/list-warga', [ListKetuaRtController::class, 'showListWarga'])->name('listWarga');    
         Route::get('/delete-warga/{id}', [ListKetuaRtController::class, 'destroy'])->name('deleteWarga');    
+
+        Route::get('/detail-warga/{id}', [ListKetuaRtController::class, 'detailWarga'])->name('detailWarga');    
     });
 
     Route::get('/change-password', [ProfileController::class, 'show'])->name('changePassword');

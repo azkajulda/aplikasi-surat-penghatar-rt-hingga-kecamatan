@@ -37,7 +37,7 @@
             <thead>
               <tr>
                 <th>No</th>
-                <th>Nama RT</th>
+                <th>Nama Warga</th>
                 <th>NIK</th>
                 <th>No Kartu Keluarga</th>
                 <th>Action</th>
@@ -47,10 +47,15 @@
               @foreach ( $wargas as $warga)
                 <tr>
                   <td>{{$loop->iteration}}</td>
-                  <td>{{$warga->profile->nama ?? '-'}}</td>
-                  <td>{{$warga->profile->no_nik ?? '-'}}</td>
-                  <td>{{$warga->user->no_kk ?? '-'}}</td>
+                  <td>{{$warga->nama ?? '-'}}</td>
+                  <td>{{$warga->no_nik ?? '-'}}</td>
+                  <td>{{$warga->no_kk ?? '-'}}</td>
                   <td class="text-center w-300">
+                    <a href={{route('detailWarga', $warga->user_id)}}>
+                      <button class="btn btn-success w-80"><i class="fa fa-id-card"></i>
+                        Detail
+                      </button>
+                    </a>
                     <a href={{route('deleteWarga', $warga->id)}}>
                       <button class="btn btn-danger w-80"><i class="fa fa-trash"></i>
                         Delete

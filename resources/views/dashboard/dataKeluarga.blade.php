@@ -8,7 +8,15 @@
       <!-- Custom Tabs -->
       <div class="box">
         <div class="box-header mb-20">
-          <h3 class="box-title">Nomor Kartu Keluarga : {{Auth::user()->no_kk}}</h3>
+          <h3 class="box-title">
+            @if (isset($isBack))
+              <a href="{{url()->previous()}}">
+                <i class="fa fa-arrow-circle-left"></i> <span>Kembali</span>
+              </a>
+              <br><br>
+            @endif
+            Nomor Kartu Keluarga : {{Auth::user()->no_kk}}
+          </h3>
 
           <div class="box-tools">
             <a href="{{route('addKeluarga')}}">
@@ -37,7 +45,7 @@
               <tr>
                 <th>No</th>
                 <th>Nama Warga</th>
-                <th>Pejerkaan</th>
+                <th>Status Keluarga</th>
                 <th>Tempat, Tanggal Lahir</th>
                 <th>Jenis Kelamin</th>
                 <th>Action</th>
@@ -48,7 +56,7 @@
                 <tr>
                   <td>{{$loop->iteration}}</td>
                   <td>{{$listKeluarga->profile->nama}}</td>
-                  <td>{{$listKeluarga->profile->pekerjaan}}</td>
+                  <td>{{$listKeluarga->status_keluarga ?? '-'}}</td>
                   <td>{{$listKeluarga->profile->tempat_lahir .', '. date('d M Y', strtotime($listKeluarga->profile->tanggal_lahir))}}</td>
                   <td>{{$listKeluarga->profile->jenis_kelamin}}</td>
                   <td class="text-center w-300">

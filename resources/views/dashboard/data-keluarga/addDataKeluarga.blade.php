@@ -33,10 +33,22 @@
                   <input type="number" name="no_nik" class="form-control" id="noNik" placeholder="Nomor Induk Kependudukan" required>
                 </div>
 
-                <div class="form-group col-md-8">
+                <div class="form-group {{Auth::user()->role === 'warga' ? 'col-md-4' : 'col-md-8'}}">
                   <label for="nama">Nama Lengkap*</label>
                   <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Lengkap" required>
                 </div>
+
+                @if (Auth::user()->role === 'warga')
+                  <div class="form-group col-md-4">
+                    <label>Status Keluarga*</label>
+                    <select class="form-control" name="status_keluarga" required>
+                      <option value="">&mdash;Pilih Status Keluarga Anda&mdash;</option>
+                      <option value="Kepala Rumah Tangga">Kepala Rumah Tangga</option>
+                      <option value="Istri">Istri</option>
+                      <option value="Anak">Anak</option>
+                    </select>
+                  </div>
+                @endif
 
                 <div class="form-group col-md-4">
                   <label for="jenis_kelamin">Jenis Kelamin*</label>

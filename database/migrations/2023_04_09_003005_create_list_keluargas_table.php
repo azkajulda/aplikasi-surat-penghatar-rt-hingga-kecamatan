@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('list_keluargas', function (Blueprint $table) {
             $table->id();
+            $table->string('status_keluarga')->nullable();
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('id_rt');

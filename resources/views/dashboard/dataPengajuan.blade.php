@@ -22,8 +22,9 @@
       <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
           <li class="active"><a href="#tab_1" data-toggle="tab">Sedang Diajukan</a></li>
+          <li><a href="#tab_2" data-toggle="tab">Daftar Pengajuan Surat</a></li>
           @if (Auth::user()->role === 'lurah')
-            <li><a href="#tab_2" data-toggle="tab">Sudah Disetujui</a></li>
+            <li><a href="#tab_3" data-toggle="tab">Sudah Disetujui</a></li>
           @endif
         </ul>
         <div class="tab-content">
@@ -62,8 +63,35 @@
             </div>
           </div>
 
+          <div class="tab-pane" id="tab_2">
+            <div class="table-responsive">
+              <table id="table-pengajuan" class="table table-bordered table-striped" aria-describedby="table-pengajuan">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Tanggal Permohonan</th>
+                    <th>NIK</th>
+                    <th>Keperluan</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach ($suratRiwayat as $dataRiwayat)
+                    <tr>
+                      <td>{{$loop->iteration}}</td>
+                      <td>{{$dataRiwayat->tanggal_permohonan}}</td>
+                      <td>{{$dataRiwayat->no_nik}}</td>
+                      <td>{{$dataRiwayat->jenis_kepentingan}}</td>
+                      <td>{{$dataRiwayat->status}}</td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
+          </div>
+
           @if (Auth::user()->role === 'lurah')
-            <div class="tab-pane" id="tab_2">
+            <div class="tab-pane" id="tab_3">
               <div class="table-responsive">
                 <table id="table-disetujui" class="table table-bordered table-striped" aria-describedby="table-diajukan">
                   <thead>

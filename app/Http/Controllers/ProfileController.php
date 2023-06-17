@@ -147,6 +147,7 @@ class ProfileController extends Controller
             $profile->golongan_darah = $request->golongan_darah;
             $profile->update();
             
+            $listKeluarga->status_keluarga = $request->status_keluarga;
             $listKeluarga->id_user = Auth::user()->id;
             $listKeluarga->id_profile = $profile->id;
             $listKeluarga->update();
